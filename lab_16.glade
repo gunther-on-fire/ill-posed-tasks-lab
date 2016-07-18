@@ -299,7 +299,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="L param"/>
                           <attributes>
-                            <attribute name="text">4</attribute>
+                            <attribute name="text">0</attribute>
                           </attributes>
                         </child>
                       </object>

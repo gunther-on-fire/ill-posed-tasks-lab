@@ -2,12 +2,79 @@
 <!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkListStore" id="L parameter_liststore">
+    <columns>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">256</col>
+      </row>
+      <row>
+        <col id="0">1024</col>
+      </row>
+      <row>
+        <col id="0">4096</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="m param_liststore">
+    <columns>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">128</col>
+      </row>
+      <row>
+        <col id="0">256</col>
+      </row>
+      <row>
+        <col id="0">512</col>
+      </row>
+      <row>
+        <col id="0">1024</col>
+      </row>
+      <row>
+        <col id="0">2048</col>
+      </row>
+      <row>
+        <col id="0">4096</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="p parameter_liststore">
+    <columns>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">2</col>
+      </row>
+      <row>
+        <col id="0">4</col>
+      </row>
+      <row>
+        <col id="0">8</col>
+      </row>
+      <row>
+        <col id="0">16</col>
+      </row>
+      <row>
+        <col id="0">40</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkWindow" id="Main Window">
     <property name="can_focus">False</property>
     <property name="border_width">6</property>
     <property name="title" translatable="yes">Main window</property>
     <property name="default_width">500</property>
     <property name="default_height">400</property>
+    <signal name="delete-event" handler="OnDeleteWindow" swapped="no"/>
     <child>
       <object class="GtkNotebook" id="Tabs">
         <property name="visible">True</property>
@@ -113,6 +180,13 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
+                        <property name="model">p parameter_liststore</property>
+                        <child>
+                          <object class="GtkCellRendererText"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -221,6 +295,13 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
+                        <property name="model">L parameter_liststore</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="L param"/>
+                          <attributes>
+                            <attribute name="text">4</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -246,6 +327,13 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
+                        <property name="model">m param_liststore</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="m param"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -274,7 +362,7 @@
                 <property name="label" translatable="yes">Количество информации, содержащейся в дискретизированной модели входного сигнала</property>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="padding">60</property>
                 <property name="position">5</property>

@@ -68,9 +68,10 @@
       </row>
     </data>
   </object>
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="Main Window">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
+    <signal name="delete-event" handler="OnDeleteWindow" swapped="no"/>
     <child>
       <object class="GtkNotebook">
         <property name="visible">True</property>
@@ -183,6 +184,8 @@
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="model">p param list</property>
+                    <property name="active">0</property>
+                    <signal name="changed" handler="OnChange" swapped="no"/>
                     <child>
                       <object class="GtkCellRendererText"/>
                       <attributes>

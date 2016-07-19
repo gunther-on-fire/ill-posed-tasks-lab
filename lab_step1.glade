@@ -218,6 +218,7 @@
                         <property name="max_width_chars">2</property>
                         <property name="caps_lock_warning">False</property>
                         <property name="input_purpose">number</property>
+                        <signal name="changed" handler="OnXChanged" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -242,7 +243,6 @@
                     <property name="margin_right">5</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <signal name="clicked" handler="OnEntryChange" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>

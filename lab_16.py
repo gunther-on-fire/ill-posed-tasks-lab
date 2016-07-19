@@ -1,27 +1,63 @@
+#!/usr/bin/python3
+
 import gi
 gi.require_version('Gtk', '3.0')
+
 from gi.repository import Gtk
 
-def ComboBoxChoice(combobox):
-    #import ipdb; ipdb.set_trace()
-    txt = combobox.get_model()[combobox.get_active()]
-    print(txt[0])
+import logging
 
-def ChangedEntry(button):
-    entry = builder.get_object('X length_entry')
-    number = int(entry.get_text())
-    print(number)
+class Tab1Handler:
+    # TODO use proper callbacks names if possible
 
+    def __init__(self, builder):
+        self.logger = logging.getLogger('T1Handler')
+        self.logger.debug('Created Tab1Handler')
+
+        self.combobox_value = None
+        self.x_number = None
+
+        self.button = builder.get_object('non-discret-graph')
+
+        self._validate()
+
+    def OnChange(self, combobox):
+        self.combobox_value =  combobox.get_model()[combobox.get_active()][0]
+        self.logger.debug('New combobox value: %s' % self.combobox_value)
+
+        self._validate()
+
+    def OnDeleteWindow(self, *args):
+        Gtk.main_quit(*args)
+
+    def OnXChanged(self, entry):
+        text = entry.get_text()
+        self.logger.debug('New X entry value: %s' % text)
+        try:
+            self.x_number = int(text)
+        except:
+            self.x_number = None
+
+        self._validate()
+
+    def _validate(self):
+        valid = self.combobox_value is not None and self.x_number is not None
+        self.logger.debug('Current state is %s' % {True: 'valid', False: 'invalid'}[valid])
+        self.button.set_sensitive(valid)
+
+logging.basicConfig(format='%(asctime)s %(levelname)s [%(name)s] %(message)s', level=logging.DEBUG)
+logging.info('Starting application')
+
+logging.debug('Loading UI from glade file')
 builder = Gtk.Builder()
 builder.add_from_file('lab_step1.glade')
-handlers = {
-    'OnDeleteWindow': Gtk.main_quit,
-    'OnChange': ComboBoxChoice,
-    'OnEntryChange': ChangedEntry
-}
 
-builder.connect_signals(handlers)
+logging.debug('Connecting signals to Tab1Handler')
+builder.connect_signals(Tab1Handler(builder))
+
+logging.debug('Showing main window')
 window = builder.get_object('Main Window')
 window.show_all()
 
+logging.debug('Entering main loop')
 Gtk.main()

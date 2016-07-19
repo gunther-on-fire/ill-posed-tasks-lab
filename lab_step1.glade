@@ -19,6 +19,7 @@
       </row>
     </data>
   </object>
+  <object class="GtkEntryCompletion" id="entrycompletion1"/>
   <object class="GtkListStore" id="m param list">
     <columns>
       <!-- column-name gint1 -->
@@ -147,73 +148,106 @@
               </packing>
             </child>
             <child>
-              <object class="GtkGrid" id="p, L parameters">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="row_homogeneous">True</property>
-                <property name="column_homogeneous">True</property>
+                <property name="hexpand">True</property>
                 <child>
-                  <object class="GtkLabel" id="p">
+                  <object class="GtkGrid" id="p, L parameters">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Параметр p</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="X length">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Длина реализации X</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBox">
-                    <property name="width_request">60</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="model">p param list</property>
-                    <property name="active">0</property>
-                    <signal name="changed" handler="OnChange" swapped="no"/>
+                    <property name="row_homogeneous">True</property>
+                    <property name="column_homogeneous">True</property>
                     <child>
-                      <object class="GtkCellRendererText"/>
-                      <attributes>
-                        <attribute name="text">0</attribute>
-                      </attributes>
+                      <object class="GtkLabel" id="p">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Параметр p</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="X length">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Длина реализации X</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBox">
+                        <property name="width_request">60</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="model">p param list</property>
+                        <signal name="changed" handler="OnChange" swapped="no"/>
+                        <child>
+                          <object class="GtkCellRendererText"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="X length_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="max_length">2</property>
+                        <property name="width_chars">2</property>
+                        <property name="max_width_chars">2</property>
+                        <property name="caps_lock_warning">False</property>
+                        <property name="input_purpose">number</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                      </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">1</property>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry">
+                  <object class="GtkButton" id="non-discret-graph">
+                    <property name="label" translatable="yes">График</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">end</property>
+                    <property name="valign">end</property>
+                    <property name="margin_right">5</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="width_chars">5</property>
-                    <property name="shadow_type">none</property>
-                    <property name="caps_lock_warning">False</property>
-                    <property name="input_purpose">digits</property>
+                    <signal name="clicked" handler="OnEntryChange" swapped="no"/>
                   </object>
                   <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">1</property>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>
@@ -280,6 +314,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">L param list</property>
+                        <signal name="changed" handler="OnChange" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="Lparamlist"/>
                           <attributes>
@@ -328,6 +363,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">m param list</property>
+                        <signal name="changed" handler="OnChange" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="m paramlist"/>
                           <attributes>

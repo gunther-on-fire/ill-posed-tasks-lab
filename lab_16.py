@@ -3,10 +3,9 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 def ComboBoxChoice(combobox):
-	print('Онотоле — краб!')
-	txt = combobox.get_active()
-	print(txt)
-
+	#import ipdb; ipdb.set_trace()
+	txt = combobox.get_model()[combobox.get_active()]
+	print(txt[0])
 
 builder = Gtk.Builder()
 builder.add_from_file('lab_step1.glade')

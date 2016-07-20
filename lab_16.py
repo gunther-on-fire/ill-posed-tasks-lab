@@ -7,6 +7,11 @@ from gi.repository import Gtk
 
 import logging
 
+from matplotlib.figure import Figure
+from numpy import arange, pi, random, linspace
+import matplotlib.cm as cm
+from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as FigureCanvas
+
 class Tab1Handler:
 
     def __init__(self, builder):
@@ -15,7 +20,6 @@ class Tab1Handler:
 
         self.combobox_value = None
         self.x_number = 10
-
         self.button = builder.get_object('non-discret-graph')
 
         self._validate()
@@ -56,6 +60,20 @@ builder.connect_signals(Tab1Handler(builder))
 
 logging.debug('Showing main window')
 window = builder.get_object('Main Window')
+
+logging.debug('Showing non-discrete graph')
+non_discrete_graph = builder.get_object('graph before discr')
+
+fig = Figure(dpi=100)
+ax = fig.add_subplot(111)
+
+#0.8*[exp^(-x^p)+ exp(-(x+3.5)^p) + exp(-(x-3.5)^p) + exp(-(x+7)^p) + exp(-(x-7)^p)]+0.2
+
+ax.plot()
+
+canvas = FigureCanvas(fig)
+non_discrete_graph.add_with_viewport(canvas)
+
 window.show_all()
 
 logging.debug('Entering main loop')

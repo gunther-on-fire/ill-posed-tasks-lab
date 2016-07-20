@@ -72,7 +72,7 @@
   <object class="GtkWindow" id="Main Window">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <signal name="delete-event" handler="OnDeleteWindow" swapped="no"/>
+    <signal name="delete-event" handler="CloseApp" swapped="no"/>
     <child>
       <object class="GtkNotebook">
         <property name="visible">True</property>
@@ -192,7 +192,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">p param list</property>
-                        <signal name="changed" handler="OnChange" swapped="no"/>
+                        <signal name="changed" handler="ChooseComboBoxValue" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText"/>
                           <attributes>
@@ -216,9 +216,10 @@
                         <property name="max_length">2</property>
                         <property name="width_chars">2</property>
                         <property name="max_width_chars">2</property>
+                        <property name="text" translatable="yes">10</property>
                         <property name="caps_lock_warning">False</property>
                         <property name="input_purpose">number</property>
-                        <signal name="changed" handler="OnXChanged" swapped="no"/>
+                        <signal name="changed" handler="XNewValue" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -314,7 +315,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">L param list</property>
-                        <signal name="changed" handler="OnChange" swapped="no"/>
+                        <signal name="changed" handler="ChooseComboBoxValue" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="Lparamlist"/>
                           <attributes>
@@ -363,7 +364,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">m param list</property>
-                        <signal name="changed" handler="OnChange" swapped="no"/>
+                        <signal name="changed" handler="ChooseComboBoxValue" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="m paramlist"/>
                           <attributes>
@@ -433,7 +434,8 @@
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="margin_left">5</property>
-                    <property name="label" translatable="yes">H = формула =</property>
+                    <property name="margin_right">5</property>
+                    <property name="label" translatable="yes">H = формула = </property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

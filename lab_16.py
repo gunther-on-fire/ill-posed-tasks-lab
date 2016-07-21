@@ -49,6 +49,19 @@ class Tab1Handler:
 
         self._validate()
 
+    def MakeAPlot(self, button):
+        p = Tab1Handler(builder)
+        X = Tab1Handler(builder)
+
+        mire_non_discr_x = np.arange(-X.x_number, X.x_number+0.01, 0.01)
+        mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**p.p_value) + np.exp(-(mire_non_discr_x+3.5)**p.p_value) \
+                    + np.exp(-(mire_non_discr_x-3.5)**p.p_value)+ np.exp(-(mire_non_discr_x+7)**p.p_value) \
+                    + np.exp(-(mire_non_discr_x-7)**p.p_value))+0.2
+
+        mire_non_discr.set_ylim(0.1,1.1)
+
+        mire_non_discr.plot(mire_non_discr_x, mire_non_discr_y)
+
     def _validate(self):
         valid = self.p_value is not None and self.x_number is not None
         self.logger.debug("Current state is %s" % ('valid' if valid else 'invalid'))
@@ -72,18 +85,6 @@ non_discrete_graph = builder.get_object('graph before discr')
 
 fig = Figure(dpi=100)
 mire_non_discr = fig.add_subplot(111)
-
-p = Tab1Handler(builder)
-print(p.p_value)
-
-mire_non_discr_x = np.arange(-10, 10.01, 0.01)
-mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**p.p_value) + np.exp(-(mire_non_discr_x+3.5)**p.p_value) \
-                    + np.exp(-(mire_non_discr_x-3.5)**p.p_value)+ np.exp(-(mire_non_discr_x+7)**p.p_value) \
-                    + np.exp(-(mire_non_discr_x-7)**p.p_value))+0.2
-
-mire_non_discr.set_ylim(0.1,1.1)
-
-mire_non_discr.plot(mire_non_discr_x, mire_non_discr_y)
 
 canvas = FigureCanvas(fig)
 non_discrete_graph.add_with_viewport(canvas)

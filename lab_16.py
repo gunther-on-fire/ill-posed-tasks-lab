@@ -25,7 +25,19 @@ class Tab1Handler:
 
     def OnChangedP(self, p):
         self.p_value =  p.get_model()[p.get_active()][0]
-        self.logger.debug('New combobox value: %s' % self.p_value)
+        self.logger.debug('New p value: %s' % self.p_value)
+
+        self._validate()
+
+    def OnChangedM(self, m):
+        self.m_value =  m.get_model()[m.get_active()][0]
+        self.logger.debug('New m value: %s' % self.m_value)
+
+        self._validate()
+
+    def OnChangedL(self, L):
+        self.L_value = L.get_model()[L.get_active()][0]
+        self.logger.debug('New L value: %s' % self.L_value)
 
         self._validate()
 
@@ -50,17 +62,33 @@ class Tab1Handler:
         self._validate()
 
     def MakeAPlot(self, button):
-        p = Tab1Handler(builder)
-        X = Tab1Handler(builder)
+        mire_non_discr.cla()
 
-        mire_non_discr_x = np.arange(-X.x_number, X.x_number+0.01, 0.01)
-        mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**p.p_value) + np.exp(-(mire_non_discr_x+3.5)**p.p_value) \
-                    + np.exp(-(mire_non_discr_x-3.5)**p.p_value)+ np.exp(-(mire_non_discr_x+7)**p.p_value) \
-                    + np.exp(-(mire_non_discr_x-7)**p.p_value))+0.2
-
+        mire_non_discr_x = np.arange(-self.x_number/2, self.x_number/2+0.01, self.x_number/(self.m_value-1))
+        mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**self.p_value) + np.exp(-(mire_non_discr_x+3.5)**self.p_value) \
+                    + np.exp(-(mire_non_discr_x-3.5)**self.p_value)+ np.exp(-(mire_non_discr_x+7)**self.p_value) \
+                    + np.exp(-(mire_non_discr_x-7)**self.p_value))+0.2
+        print(mire_non_discr)
         mire_non_discr.set_ylim(0.1,1.1)
+        mire_non_discr.set_xlim(-self.x_number/2,self.x_number/2)
 
         mire_non_discr.plot(mire_non_discr_x, mire_non_discr_y)
+
+    def MakeADiscretePlot(self, button):
+        mire_discr.cla()
+
+        mire_discr_x = np.arange(0, self.m_value, 1)
+        mire_non_discr_x = np.arange(-self.x_number/2, self.x_number/2+0.01, self.x_number/(self.m_value-1))
+
+        mire_discr_y = self.L_value*(0.8*(np.exp(-mire_non_discr_x**self.p_value) \
+                    + np.exp(-(mire_non_discr_x+3.5)**self.p_value) \
+                    + np.exp(-(mire_non_discr_x-3.5)**self.p_value)+ np.exp(-(mire_non_discr_x+7)**self.p_value) \
+                    + np.exp(-(mire_non_discr_x-7)**self.p_value))+0.2)
+
+        mire_discr.set_ylim(0, self.L_value+1)
+        mire_discr.set_xlim(0,self.m_value)
+
+        mire_discr.plot(mire_discr_x, mire_discr_y, 'o')
 
     def _validate(self):
         valid = self.p_value is not None and self.x_number is not None
@@ -88,6 +116,15 @@ mire_non_discr = fig.add_subplot(111)
 
 canvas = FigureCanvas(fig)
 non_discrete_graph.add_with_viewport(canvas)
+
+logging.debug('Showing discrete graph')
+discrete_graph = builder.get_object('graph after discr')
+
+fig2 = Figure(dpi=100)
+mire_discr = fig2.add_subplot(111)
+
+canvas2 = FigureCanvas(fig2)
+discrete_graph.add_with_viewport(canvas2)
 
 window.show_all()
 

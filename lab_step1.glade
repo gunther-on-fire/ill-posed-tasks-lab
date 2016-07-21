@@ -315,6 +315,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">L param list</property>
+                        <signal name="changed" handler="OnChangedL" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="Lparamlist"/>
                           <attributes>
@@ -363,6 +364,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">m param list</property>
+                        <signal name="changed" handler="OnChangedM" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="m paramlist"/>
                           <attributes>
@@ -394,6 +396,7 @@
                     <property name="margin_right">5</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">False</property>
+                    <signal name="clicked" handler="MakeADiscretePlot" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>

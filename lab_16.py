@@ -73,6 +73,7 @@ non_discrete_graph = builder.get_object('graph before discr')
 fig = Figure(dpi=100)
 mire_non_discr = fig.add_subplot(111)
 
+p = 10
 mire_non_discr_x = np.arange(-10, 10.01, 0.01)
 mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**p) + np.exp(-(mire_non_discr_x+3.5)**p) \
                     + np.exp(-(mire_non_discr_x-3.5)**p)+ np.exp(-(mire_non_discr_x+7)**p) \

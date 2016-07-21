@@ -17,8 +17,8 @@ class Tab1Handler:
         self.logger = logging.getLogger('T1Handler')
         self.logger.debug('Created Tab1Handler')
 
-        self.p_value = None
-        self.x_number = 10
+        self.p_value = 2
+        self.x_number = None
         self.button = builder.get_object('non-discret-graph')
 
         self._validate()
@@ -28,7 +28,7 @@ class Tab1Handler:
         self.logger.debug('New combobox value: %s' % self.p_value)
 
         self._validate()
-        return  self.p_value
+
     '''
     def ChooseComboBoxValue(self, combobox):
         self.combobox_value =  combobox.get_model()[combobox.get_active()][0]
@@ -73,11 +73,13 @@ non_discrete_graph = builder.get_object('graph before discr')
 fig = Figure(dpi=100)
 mire_non_discr = fig.add_subplot(111)
 
-p = 10
+p = Tab1Handler(builder)
+print(p.p_value)
+
 mire_non_discr_x = np.arange(-10, 10.01, 0.01)
-mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**p) + np.exp(-(mire_non_discr_x+3.5)**p) \
-                    + np.exp(-(mire_non_discr_x-3.5)**p)+ np.exp(-(mire_non_discr_x+7)**p) \
-                    + np.exp(-(mire_non_discr_x-7)**p))+0.2
+mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**p.p_value) + np.exp(-(mire_non_discr_x+3.5)**p.p_value) \
+                    + np.exp(-(mire_non_discr_x-3.5)**p.p_value)+ np.exp(-(mire_non_discr_x+7)**p.p_value) \
+                    + np.exp(-(mire_non_discr_x-7)**p.p_value))+0.2
 
 mire_non_discr.set_ylim(0.1,1.1)
 

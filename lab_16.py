@@ -117,19 +117,37 @@ builder.add_from_file('lab_step1.glade')
 logging.debug('Showing main window')
 window = builder.get_object('Main Window')
 
+#Tab1
+
 logging.debug('Configuring non-discrete plot')
 non_discrete_graph = builder.get_object('graph before discr')
 
-fig = Figure(dpi=100)
-mire_non_discr = fig.add_subplot(111)
-non_discrete_graph.add_with_viewport(FigureCanvas(fig))
+non_discrete_fig = Figure(dpi=100)
+mire_non_discr = non_discrete_fig.add_subplot(111)
+non_discrete_graph.add_with_viewport(FigureCanvas(non_discrete_fig))
 
 logging.debug('Configuring discrete plot')
 discrete_graph = builder.get_object('graph after discr')
 
-fig2 = Figure(dpi=100)
-mire_discr = fig2.add_subplot(111)
-discrete_graph.add_with_viewport(FigureCanvas(fig2))
+discrete_fig = Figure(dpi=100)
+mire_discr = discrete_fig.add_subplot(111)
+discrete_graph.add_with_viewport(FigureCanvas(discrete_fig))
+
+#Tab2
+
+logging.debug('Calculating FFT of the input data')
+FFT_before_graph = builder.get_object('Fourier_before')
+
+FFT_before_fig = Figure(dpi=100)
+FFT_before = FFT_before_fig.add_subplot(111)
+FFT_before_graph.add_with_viewport(FigureCanvas(FFT_before_fig))
+
+logging.debug('Configuring FFT of the input data')
+FFT_after_graph = builder.get_object('Fourier_after')
+
+FFT_after_fig = Figure(dpi=100)
+FFT_after = FFT_after_fig.add_subplot(111)
+FFT_after_graph.add_with_viewport(FigureCanvas(FFT_after_fig))
 
 logging.debug('Connecting signals to Tab1Handler')
 builder.connect_signals(Tab1Handler(builder, mire_non_discr, mire_discr))

@@ -19,56 +19,6 @@
       </row>
     </data>
   </object>
-  <object class="GtkEntryCompletion" id="entrycompletion1"/>
-  <object class="GtkListStore" id="m param list">
-    <columns>
-      <!-- column-name gint1 -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">128</col>
-      </row>
-      <row>
-        <col id="0">256</col>
-      </row>
-      <row>
-        <col id="0">512</col>
-      </row>
-      <row>
-        <col id="0">1024</col>
-      </row>
-      <row>
-        <col id="0">2048</col>
-      </row>
-      <row>
-        <col id="0">4096</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="p param list">
-    <columns>
-      <!-- column-name gint1 -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">2</col>
-      </row>
-      <row>
-        <col id="0">4</col>
-      </row>
-      <row>
-        <col id="0">8</col>
-      </row>
-      <row>
-        <col id="0">16</col>
-      </row>
-      <row>
-        <col id="0">40</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkWindow" id="Main Window">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -148,10 +98,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="non-discrete-graph-params">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkGrid" id="p, L parameters">
                     <property name="visible">True</property>
@@ -183,7 +133,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkComboBox">
+                      <object class="GtkComboBox" id="p param combobox">
                         <property name="width_request">60</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -216,6 +166,7 @@
                         <property name="max_length">2</property>
                         <property name="width_chars">2</property>
                         <property name="max_width_chars">2</property>
+                        <property name="text" translatable="yes">20</property>
                         <property name="caps_lock_warning">False</property>
                         <property name="input_purpose">number</property>
                         <signal name="changed" handler="XNewValue" swapped="no"/>
@@ -230,25 +181,6 @@
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="non-discret-graph">
-                    <property name="label" translatable="yes">График</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">end</property>
-                    <property name="valign">end</property>
-                    <property name="margin_right">5</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <signal name="clicked" handler="MakeAPlot" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>
@@ -285,57 +217,6 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="homogeneous">True</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="homogeneous">True</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">5</property>
-                        <property name="label" translatable="yes">Число отсчётов по шкале функции L</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkComboBox" id="L list">
-                        <property name="width_request">60</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="model">L param list</property>
-                        <signal name="changed" handler="OnChangedL" swapped="no"/>
-                        <child>
-                          <object class="GtkCellRendererText" id="Lparamlist"/>
-                          <attributes>
-                            <attribute name="text">0</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -380,28 +261,58 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="discretization_button">
-                    <property name="label" translatable="yes">Вычислить</property>
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">end</property>
-                    <property name="valign">end</property>
-                    <property name="margin_right">5</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">False</property>
-                    <signal name="clicked" handler="MakeADiscretePlot" swapped="no"/>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Число отсчётов по шкале функции L</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBox" id="L list">
+                        <property name="width_request">60</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="model">L param list</property>
+                        <signal name="changed" handler="OnChangedL" swapped="no"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="Lparamlist"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
               </object>
@@ -484,5 +395,55 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkEntryCompletion" id="entrycompletion1"/>
+  <object class="GtkListStore" id="m param list">
+    <columns>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">128</col>
+      </row>
+      <row>
+        <col id="0">256</col>
+      </row>
+      <row>
+        <col id="0">512</col>
+      </row>
+      <row>
+        <col id="0">1024</col>
+      </row>
+      <row>
+        <col id="0">2048</col>
+      </row>
+      <row>
+        <col id="0">4096</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="p param list">
+    <columns>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">2</col>
+      </row>
+      <row>
+        <col id="0">4</col>
+      </row>
+      <row>
+        <col id="0">8</col>
+      </row>
+      <row>
+        <col id="0">16</col>
+      </row>
+      <row>
+        <col id="0">40</col>
+      </row>
+    </data>
   </object>
 </interface>

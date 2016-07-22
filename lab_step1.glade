@@ -19,6 +19,56 @@
       </row>
     </data>
   </object>
+  <object class="GtkEntryCompletion" id="entrycompletion1"/>
+  <object class="GtkListStore" id="m param list">
+    <columns>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">128</col>
+      </row>
+      <row>
+        <col id="0">256</col>
+      </row>
+      <row>
+        <col id="0">512</col>
+      </row>
+      <row>
+        <col id="0">1024</col>
+      </row>
+      <row>
+        <col id="0">2048</col>
+      </row>
+      <row>
+        <col id="0">4096</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="p param list">
+    <columns>
+      <!-- column-name gint1 -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">2</col>
+      </row>
+      <row>
+        <col id="0">4</col>
+      </row>
+      <row>
+        <col id="0">8</col>
+      </row>
+      <row>
+        <col id="0">16</col>
+      </row>
+      <row>
+        <col id="0">40</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkWindow" id="Main Window">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -142,6 +192,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">p param list</property>
+                        <property name="active">0</property>
                         <signal name="changed" handler="OnChangedP" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText"/>
@@ -245,6 +296,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">m param list</property>
+                        <property name="active">0</property>
                         <signal name="changed" handler="OnChangedM" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="m paramlist"/>
@@ -294,6 +346,7 @@
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="model">L param list</property>
+                        <property name="active">0</property>
                         <signal name="changed" handler="OnChangedL" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="Lparamlist"/>
@@ -395,55 +448,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkEntryCompletion" id="entrycompletion1"/>
-  <object class="GtkListStore" id="m param list">
-    <columns>
-      <!-- column-name gint1 -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">128</col>
-      </row>
-      <row>
-        <col id="0">256</col>
-      </row>
-      <row>
-        <col id="0">512</col>
-      </row>
-      <row>
-        <col id="0">1024</col>
-      </row>
-      <row>
-        <col id="0">2048</col>
-      </row>
-      <row>
-        <col id="0">4096</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="p param list">
-    <columns>
-      <!-- column-name gint1 -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">2</col>
-      </row>
-      <row>
-        <col id="0">4</col>
-      </row>
-      <row>
-        <col id="0">8</col>
-      </row>
-      <row>
-        <col id="0">16</col>
-      </row>
-      <row>
-        <col id="0">40</col>
-      </row>
-    </data>
   </object>
 </interface>

@@ -22,38 +22,35 @@ class Tab1Handler:
         # Populate default values by explicitly calling on-change callbacks
         # Here we disable plotting because all values will be set only at the end of the next block
         self.do_not_plot = True
-        self.OnChangedP(builder.get_object('p param combobox'))
-        self.XNewValue(builder.get_object('X length_entry'))
-        self.OnChangedL(builder.get_object('L list'))
-        self.OnChangedM(builder.get_object('m param'))
+        self.On_Changed_P(builder.get_object('p param combobox'))
+        self.On_Changed_X(builder.get_object('X length_entry'))
+        self.On_Changed_L(builder.get_object('L list'))
+        self.On_Changed_M(builder.get_object('m param'))
 
         self.do_not_plot = False
 
         self.plot()
 
-    def OnChangedP(self, p):
+    def On_Changed_P(self, p):
         self.p_value =  p.get_model()[p.get_active()][0]
         self.logger.debug('New p value: %s' % self.p_value)
 
         self.plot()
 
-    def OnChangedM(self, m):
+    def On_Changed_M(self, m):
         self.m_value =  m.get_model()[m.get_active()][0]
         self.logger.debug('New m value: %s' % self.m_value)
 
         self.plot()
 
 
-    def OnChangedL(self, L):
+    def On_Changed_L(self, L):
         self.L_value = L.get_model()[L.get_active()][0]
         self.logger.debug('New L value: %s' % self.L_value)
 
         self.plot()
 
-    def CloseApp(self, *args):
-        Gtk.main_quit(*args)
-
-    def XNewValue(self, entry):
+    def On_Changed_X(self, entry):
         text = entry.get_text()
         self.logger.debug('New X entry value: %s' % text)
         try:
@@ -62,6 +59,9 @@ class Tab1Handler:
             self.x_number = None
 
         self.plot()
+
+    def CloseApp(self, *args):
+        Gtk.main_quit(*args)
 
     def plot(self):
 
@@ -74,13 +74,16 @@ class Tab1Handler:
         self.mire_non_discr.cla()
         self.mire_discr.cla()
 
-        if not all([self.x_number, self.m_value, self.p_value, self.L_value]):
+        if self.x_number == None:
+            self.mire_non_discr.cla()
+            self.mire_discr.cla()
             self.logger.debug('Current state is invalid, not plotting')
             return
 
         self.logger.debug('Updating non-discrete plot')
 
-        mire_non_discr_x = np.arange(-self.x_number/2, self.x_number/2+0.01, self.x_number/(self.m_value-1))
+        mire_non_discr_x = np.linspace(-self.x_number/2, self.x_number/2, num = self.m_value, endpoint=True)
+        self.logger.debug('The number of non-discrete plot points is %s' % len(mire_non_discr_x))
         mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**self.p_value) + np.exp(-(mire_non_discr_x+3.5)**self.p_value) \
                     + np.exp(-(mire_non_discr_x-3.5)**self.p_value)+ np.exp(-(mire_non_discr_x+7)**self.p_value) \
                     + np.exp(-(mire_non_discr_x-7)**self.p_value))+0.2
@@ -92,8 +95,8 @@ class Tab1Handler:
         self.logger.debug('Updating discrete plot')
 
         mire_discr_x = np.arange(0, self.m_value, 1)
-        mire_non_discr_x = np.arange(-self.x_number/2, self.x_number/2+0.01, self.x_number/(self.m_value-1))
-
+        mire_non_discr_x = np.linspace(-self.x_number/2, self.x_number/2, num = self.m_value, endpoint=True)
+        self.logger.debug('The number of points is %s' % len(mire_discr_x))
         mire_discr_y = self.L_value*(0.8*(np.exp(-mire_non_discr_x**self.p_value) \
                     + np.exp(-(mire_non_discr_x+3.5)**self.p_value) \
                     + np.exp(-(mire_non_discr_x-3.5)**self.p_value)+ np.exp(-(mire_non_discr_x+7)**self.p_value) \

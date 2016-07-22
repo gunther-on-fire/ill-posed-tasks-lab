@@ -193,7 +193,7 @@
                         <property name="vexpand">True</property>
                         <property name="model">p param list</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="OnChangedP" swapped="no"/>
+                        <signal name="changed" handler="On_Changed_P" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText"/>
                           <attributes>
@@ -220,7 +220,7 @@
                         <property name="text" translatable="yes">20</property>
                         <property name="caps_lock_warning">False</property>
                         <property name="input_purpose">number</property>
-                        <signal name="changed" handler="XNewValue" swapped="no"/>
+                        <signal name="changed" handler="On_Changed_X" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -297,7 +297,7 @@
                         <property name="vexpand">True</property>
                         <property name="model">m param list</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="OnChangedM" swapped="no"/>
+                        <signal name="changed" handler="On_Changed_M" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="m paramlist"/>
                           <attributes>
@@ -347,7 +347,7 @@
                         <property name="vexpand">True</property>
                         <property name="model">L param list</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="OnChangedL" swapped="no"/>
+                        <signal name="changed" handler="On_Changed_L" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="Lparamlist"/>
                           <attributes>

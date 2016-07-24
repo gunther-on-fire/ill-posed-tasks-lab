@@ -10,6 +10,8 @@ import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as FigureCanvas
 
+#The first class
+
 class Tab1Handler:
 
     def __init__(self, builder, mire_non_discr, mire_discr):

@@ -504,6 +504,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="image_position">right</property>
+                    <signal name="clicked" handler="Fourier_Image" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>

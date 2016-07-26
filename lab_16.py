@@ -7,6 +7,7 @@ from gi.repository import Gtk
 
 import logging
 import numpy as np
+import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as FigureCanvas
 
@@ -44,7 +45,6 @@ class Tab1Handler:
         self.logger.debug('New m value: %s' % self.m_value)
 
         self.plot()
-
 
     def On_Changed_L(self, L):
         self.L_value = L.get_model()[L.get_active()][0]
@@ -108,6 +108,15 @@ class Tab1Handler:
         self.mire_discr.set_xlim(0,self.m_value)
 
         self.mire_discr.plot(mire_discr_x, mire_discr_y, 'o')
+
+#Tab 2 functions
+
+        def Fourier_Image(self, button):
+            Fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
+            self.logger.debug('X values vector is %s' % len(Fourier_mire_discr_x))
+            Fourier_mire_discr_y = np.fft.fft(mire_discr_y)
+            self.fft_before.plot(Fourier_mire_discr_x, Fourier_mire_discr_y, 'o')
+
 
 logging.basicConfig(format='%(asctime)s %(levelname)s [%(name)s] %(message)s', level=logging.DEBUG)
 logging.info('Starting application')

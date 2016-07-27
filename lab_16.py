@@ -7,20 +7,19 @@ from gi.repository import Gtk
 
 import logging
 import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as FigureCanvas
 
-#The first class
-
 class Tab1Handler:
 
-    def __init__(self, builder, mire_non_discr, mire_discr):
+    def __init__(self, builder, mire_non_discr, mire_discr, fft_before, fft_after):
         self.logger = logging.getLogger('T1Handler')
         self.logger.debug('Created Tab1Handler')
 
         self.mire_non_discr = mire_non_discr
         self.mire_discr = mire_discr
+        self.fft_before = fft_before
+        self.fft_after = fft_after
 
         # Populate default values by explicitly calling on-change callbacks
         # Here we disable plotting because all values will be set only at the end of the next block
@@ -97,7 +96,6 @@ class Tab1Handler:
         self.logger.debug('Updating discrete plot')
 
         mire_discr_x = np.arange(0, self.m_value, 1)
-        mire_non_discr_x = np.linspace(-self.x_number/2, self.x_number/2, num = self.m_value, endpoint=True)
         self.logger.debug('The number of points is %s' % len(mire_discr_x))
         mire_discr_y = self.L_value*(0.8*(np.exp(-mire_non_discr_x**self.p_value) \
                     + np.exp(-(mire_non_discr_x+3.5)**self.p_value) \
@@ -109,14 +107,16 @@ class Tab1Handler:
 
         self.mire_discr.plot(mire_discr_x, mire_discr_y, 'o')
 
-#Tab 2 functions
 
-        def Fourier_Image(self, button):
-            Fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
-            self.logger.debug('X values vector is %s' % len(Fourier_mire_discr_x))
-            Fourier_mire_discr_y = np.fft.fft(mire_discr_y)
-            self.fft_before.plot(Fourier_mire_discr_x, Fourier_mire_discr_y, 'o')
+        fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
+        self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
+        fourier_mire_discr_y = np.fft.fft(mire_discr_y)
+        self.fft_before.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
 
+        fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
+        self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
+        fourier_mire_discr_y = np.fft.fft(mire_discr_y)
+        self.fft_after.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
 
 logging.basicConfig(format='%(asctime)s %(levelname)s [%(name)s] %(message)s', level=logging.DEBUG)
 logging.info('Starting application')
@@ -147,21 +147,21 @@ discrete_graph.add_with_viewport(FigureCanvas(discrete_fig))
 #Tab2
 
 logging.debug('Calculating FFT of the input data')
-FFT_before_graph = builder.get_object('Fourier_before')
+fft_before_graph = builder.get_object('Fourier_before')
 
-FFT_before_fig = Figure(dpi=100)
-FFT_before = FFT_before_fig.add_subplot(111)
-FFT_before_graph.add_with_viewport(FigureCanvas(FFT_before_fig))
+fft_before_fig = Figure(dpi=100)
+fft_before = fft_before_fig.add_subplot(111)
+fft_before_graph.add_with_viewport(FigureCanvas(fft_before_fig))
 
 logging.debug('Configuring FFT of the input data')
-FFT_after_graph = builder.get_object('Fourier_after')
+fft_after_graph = builder.get_object('Fourier_after')
 
-FFT_after_fig = Figure(dpi=100)
-FFT_after = FFT_after_fig.add_subplot(111)
-FFT_after_graph.add_with_viewport(FigureCanvas(FFT_after_fig))
+fft_after_fig = Figure(dpi=100)
+fft_after = fft_after_fig.add_subplot(111)
+fft_after_graph.add_with_viewport(FigureCanvas(fft_after_fig))
 
 logging.debug('Connecting signals to Tab1Handler')
-builder.connect_signals(Tab1Handler(builder, mire_non_discr, mire_discr))
+builder.connect_signals(Tab1Handler(builder, mire_non_discr, mire_discr, fft_before, fft_after))
 
 window.show_all()
 

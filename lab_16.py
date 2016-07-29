@@ -97,7 +97,7 @@ class Tab1Handler:
 
         mire_discr_x = np.arange(0, self.m_value, 1)
         self.logger.debug('The number of points is %s' % len(mire_discr_x))
-        mire_discr_y = self.L_value*(0.8*(np.exp(-mire_non_discr_x**self.p_value) \
+        self.mire_discr_y = self.L_value*(0.8*(np.exp(-mire_non_discr_x**self.p_value) \
                     + np.exp(-(mire_non_discr_x+3.5)**self.p_value) \
                     + np.exp(-(mire_non_discr_x-3.5)**self.p_value)+ np.exp(-(mire_non_discr_x+7)**self.p_value) \
                     + np.exp(-(mire_non_discr_x-7)**self.p_value))+0.2)
@@ -105,18 +105,27 @@ class Tab1Handler:
         self.mire_discr.set_ylim(0, self.L_value+1)
         self.mire_discr.set_xlim(0,self.m_value)
 
-        self.mire_discr.plot(mire_discr_x, mire_discr_y, 'o')
+        self.mire_discr.plot(mire_discr_x, self.mire_discr_y, 'o')
 
-
+    def Fourier_Image(self, button):
         fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
         self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
-        fourier_mire_discr_y = np.fft.fft(mire_discr_y)
+        fourier_mire_discr_y = np.fft.fft(self.mire_discr_y)
         self.fft_before.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
 
-        fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
-        self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
-        fourier_mire_discr_y = np.fft.fft(mire_discr_y)
-        self.fft_after.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
+        #fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
+        #self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
+        #fourier_mire_discr_y = np.fft.fft(mire_discr_y)
+        #self.fft_after.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
+
+#Check Frequency_Cut function, it doesn't work
+
+    def Frequency_Cut(self, entry_start, entry_end):
+        frequency_start = entry_start.get_text()
+        frequency_end = entry_end.get.get_text()
+        self.logger.debug('Cutting frequencies from %s to %s' % frequency_start % frequency_end)
+
+
 
 logging.basicConfig(format='%(asctime)s %(levelname)s [%(name)s] %(message)s', level=logging.DEBUG)
 logging.info('Starting application')

@@ -504,6 +504,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="image_position">right</property>
+                    <signal name="clicked" handler="Fourier_Image" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -583,6 +584,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="width_chars">2</property>
                     <property name="max_width_chars">2</property>
                     <property name="input_purpose">digits</property>
+                    <signal name="changed" handler="Frequency_Cut" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -615,6 +617,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="width_chars">2</property>
                     <property name="max_width_chars">2</property>
                     <property name="input_purpose">number</property>
+                    <signal name="changed" handler="Frequency_Cut" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -633,6 +636,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="margin_right">10</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">False</property>
+                    <signal name="clicked" handler="Frequency_Cut" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>

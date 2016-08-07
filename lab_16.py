@@ -78,8 +78,7 @@ app_state.mire_discr = mire_discr
 app_state.fft_before = fft_before
 app_state.fft_after = fft_after
 
-builder.connect_signals(handlers.Tab1Handler(app_state))
-builder.connect_signals(handlers.Tab2Handler(app_state))
+builder.connect_signals(handlers.HandlerFinder(app_state))
 
 window.show_all()
 

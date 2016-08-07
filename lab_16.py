@@ -12,14 +12,14 @@ from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as Figur
 
 class Tab1Handler:
 
-    def __init__(self, builder, mire_non_discr, mire_discr, fft_before, fft_after):
-        self.logger = logging.getLogger('T1Handler')
+    def __init__(self, builder, mire_non_discr, mire_discr):
+        self.logger = logging.getLogger('Tab1Handler')
         self.logger.debug('Created Tab1Handler')
 
         self.mire_non_discr = mire_non_discr
         self.mire_discr = mire_discr
-        self.fft_before = fft_before
-        self.fft_after = fft_after
+        # self.fft_before = fft_before
+        # self.fft_after = fft_after
 
         # Populate default values by explicitly calling on-change callbacks
         # Here we disable plotting because all values will be set only at the end of the next block
@@ -107,23 +107,34 @@ class Tab1Handler:
 
         self.mire_discr.plot(mire_discr_x, self.mire_discr_y, 'o')
 
-    def Fourier_Image(self, button):
-        fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
-        self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
-        fourier_mire_discr_y = np.fft.fft(self.mire_discr_y)
-        self.fft_before.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
+class Tab2Handler:
+    
+    def __init__(self, Tab1Handler, fft_before, fft_after):
+        self.logger = logging.getLogger('Tab2Handler')
+        self.logger.debug('Created Tab2Handler')
 
-        #fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
-        #self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
-        #fourier_mire_discr_y = np.fft.fft(mire_discr_y)
-        #self.fft_after.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
+        self.fft_before = fft_before
+        self.fft_after = fft_after
+        self.m_value = Tab1Handler.m_value
+        self.mire_discr_y = Tab1Handler.mire_discr_y
+
+        def Fourier_Image(self, button):
+            fourier_mire_discr_x = np.linspace(0, self.m_value, self.m_value,True)
+            self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
+            fourier_mire_discr_y = np.fft.fft(self.mire_discr_y)
+            self.fft_before.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
+
+            fourier_mire_discr_x = np.linspace(0,self.m_value,self.m_value,True)
+            self.logger.debug('X values vector is %s' % len(fourier_mire_discr_x))
+            fourier_mire_discr_y = np.fft.fft(self.mire_discr_y)
+            self.fft_after.bar(fourier_mire_discr_x, fourier_mire_discr_y, width=.7, color='b')
 
 #Check Frequency_Cut function, it doesn't work
 
-    def Frequency_Cut(self, entry_start, entry_end):
-        frequency_start = entry_start.get_text()
-        frequency_end = entry_end.get.get_text()
-        self.logger.debug('Cutting frequencies from %s to %s' % frequency_start % frequency_end)
+    # def Frequency_Cut(self, entry_start, entry_end):
+    #     frequency_start = entry_start.get_text()
+    #     frequency_end = entry_end.get.get_text()
+    #     self.logger.debug('Cutting frequencies from %s to %s' % frequency_start % frequency_end)
 
 
 
@@ -170,7 +181,7 @@ fft_after = fft_after_fig.add_subplot(111)
 fft_after_graph.add_with_viewport(FigureCanvas(fft_after_fig))
 
 logging.debug('Connecting signals to Tab1Handler')
-builder.connect_signals(Tab1Handler(builder, mire_non_discr, mire_discr, fft_before, fft_after))
+builder.connect_signals(Tab1Handler(builder, mire_non_discr, mire_discr), Tab2Handler(Tab1Handler, fft_before, fft_after))
 
 window.show_all()
 

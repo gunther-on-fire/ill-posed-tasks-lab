@@ -1,3 +1,5 @@
 *.glade~
 *.sublime-*
 \#*#
+.idea
+__pycache__

@@ -42,41 +42,41 @@ app_state = ApplicationState()
 #Tab1
 
 logging.debug('Configuring non-discrete plot')
-non_discrete_graph = builder.get_object('graph before discr')
+mire_before_discretization_plot = builder.get_object('mire_before_discretization')
 
-non_discrete_fig = Figure(dpi=100)
-mire_non_discr = non_discrete_fig.add_subplot(111)
-non_discrete_graph.add_with_viewport(FigureCanvas(non_discrete_fig))
+mire_before_discretization_figure = Figure(dpi=100)
+mire_before_discretization = mire_before_discretization_figure.add_subplot(111)
+mire_before_discretization_plot.add_with_viewport(FigureCanvas(mire_before_discretization_figure))
 
 logging.debug('Configuring discrete plot')
-discrete_graph = builder.get_object('graph after discr')
+mire_after_discretization_plot = builder.get_object('mire_after_discretization')
 
-discrete_fig = Figure(dpi=100)
-mire_discr = discrete_fig.add_subplot(111)
-discrete_graph.add_with_viewport(FigureCanvas(discrete_fig))
+mire_after_discretization_figure = Figure(dpi=100)
+mire_after_discretization = mire_after_discretization_figure.add_subplot(111)
+mire_after_discretization_plot.add_with_viewport(FigureCanvas(mire_after_discretization_figure))
 
 #Tab2
 
 logging.debug('Calculating FFT of the input data')
-fft_before_graph = builder.get_object('Fourier_before')
+fft_before_modification_plot = builder.get_object('fourier_image_before_modification')
 
-fft_before_fig = Figure(dpi=100)
-fft_before = fft_before_fig.add_subplot(111)
-fft_before_graph.add_with_viewport(FigureCanvas(fft_before_fig))
+fft_before_modification_figure = Figure(dpi=100)
+fft_before_modification = fft_before_modification_figure.add_subplot(111)
+fft_before_modification_plot.add_with_viewport(FigureCanvas(fft_before_modification_figure))
 
 logging.debug('Configuring FFT of the input data')
-fft_after_graph = builder.get_object('Fourier_after')
+fft_after_modification_plot = builder.get_object('fourier_image_after_modification')
 
-fft_after_fig = Figure(dpi=100)
-fft_after = fft_after_fig.add_subplot(111)
-fft_after_graph.add_with_viewport(FigureCanvas(fft_after_fig))
+fft_after_modification_figure = Figure(dpi=100)
+fft_after_modification = fft_after_modification_figure.add_subplot(111)
+fft_after_modification_plot.add_with_viewport(FigureCanvas(fft_after_modification_figure))
 
 logging.debug('Connecting signals')
 app_state.builder = builder
-app_state.mire_non_discr = mire_non_discr
-app_state.mire_discr = mire_discr
-app_state.fft_before = fft_before
-app_state.fft_after = fft_after
+app_state.mire_before_discretization = mire_before_discretization
+app_state.mire_after_discretization = mire_after_discretization
+app_state.fft_before_modification = fft_before_modification
+app_state.fft_after_modification = fft_after_modification
 
 builder.connect_signals(handlers.HandlerFinder(app_state))
 

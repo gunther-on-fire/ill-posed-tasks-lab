@@ -14,10 +14,10 @@ class Handler:
         # Populate default values by explicitly calling on-change callbacks
         # Here we disable plotting because all values will be set only at the end of the next block
         self.do_not_plot = True
-        self.On_Changed_P(self.app_state.builder.get_object('p param combobox'))
-        self.On_Changed_X(self.app_state.builder.get_object('X length_entry'))
-        self.On_Changed_L(self.app_state.builder.get_object('L list'))
-        self.On_Changed_M(self.app_state.builder.get_object('m param'))
+        self.On_Changed_P(self.app_state.builder.get_object('p_parameter_combobox'))
+        self.On_Changed_X(self.app_state.builder.get_object('x_length_entry'))
+        self.On_Changed_L(self.app_state.builder.get_object('l_parameter_list'))
+        self.On_Changed_M(self.app_state.builder.get_object('m_parameter_combobox'))
 
         self.do_not_plot = False
 
@@ -62,37 +62,37 @@ class Handler:
 
         self.logger.debug('Cleaning plotting area')
 
-        self.app_state.mire_non_discr.cla()
-        self.app_state.mire_discr.cla()
+        self.app_state.mire_before_discretization.cla()
+        self.app_state.mire_after_discretization.cla()
 
         if self.app_state.x_number == None:
-            self.app_state.mire_non_discr.cla()
-            self.app_state.mire_discr.cla()
+            self.app_state.mire_before_discretization.cla()
+            self.app_state.mire_after_discretization.cla()
             self.logger.debug('Current state is invalid, not plotting')
             return
 
         self.logger.debug('Updating non-discrete plot')
 
-        mire_non_discr_x = np.linspace(-self.app_state.x_number/2, self.app_state.x_number/2, num = self.app_state.m_value, endpoint=True)
-        self.logger.debug('The number of non-discrete plot points is %s' % len(mire_non_discr_x))
-        mire_non_discr_y = 0.8*(np.exp(-mire_non_discr_x**self.app_state.p_value) + np.exp(-(mire_non_discr_x+3.5)**self.app_state.p_value) \
-                    + np.exp(-(mire_non_discr_x-3.5)**self.app_state.p_value)+ np.exp(-(mire_non_discr_x+7)**self.app_state.p_value) \
-                    + np.exp(-(mire_non_discr_x-7)**self.app_state.p_value))+0.2
-        self.app_state.mire_non_discr.set_ylim(0.1,1.1)
-        self.app_state.mire_non_discr.set_xlim(-self.app_state.x_number/2,self.app_state.x_number/2)
+        mire_before_discretization_x = np.linspace(-self.app_state.x_number/2, self.app_state.x_number/2, num = self.app_state.m_value, endpoint=True)
+        self.logger.debug('The number of non-discrete plot points is %s' % len(mire_before_discretization_x))
+        mire_before_discretization_y = 0.8*(np.exp(-mire_before_discretization_x**self.app_state.p_value) + np.exp(-(mire_before_discretization_x+3.5)**self.app_state.p_value) \
+                    + np.exp(-(mire_before_discretization_x-3.5)**self.app_state.p_value)+ np.exp(-(mire_before_discretization_x+7)**self.app_state.p_value) \
+                    + np.exp(-(mire_before_discretization_x-7)**self.app_state.p_value))+0.2
+        self.app_state.mire_before_discretization.set_ylim(0.1,1.1)
+        self.app_state.mire_before_discretization.set_xlim(-self.app_state.x_number/2,self.app_state.x_number/2)
 
-        self.app_state.mire_non_discr.plot(mire_non_discr_x, mire_non_discr_y)
+        self.app_state.mire_before_discretization.plot(mire_before_discretization_x, mire_before_discretization_y)
 
         self.logger.debug('Updating discrete plot')
 
-        mire_discr_x = np.arange(0, self.app_state.m_value, 1)
-        self.logger.debug('The number of points is %s' % len(mire_discr_x))
-        self.app_state.mire_discr_y = self.app_state.L_value*(0.8*(np.exp(-mire_non_discr_x**self.app_state.p_value) \
-                    + np.exp(-(mire_non_discr_x+3.5)**self.app_state.p_value) \
-                    + np.exp(-(mire_non_discr_x-3.5)**self.app_state.p_value)+ np.exp(-(mire_non_discr_x+7)**self.app_state.p_value) \
-                    + np.exp(-(mire_non_discr_x-7)**self.app_state.p_value))+0.2)
+        mire_after_discretization_x = np.arange(0, self.app_state.m_value, 1)
+        self.logger.debug('The number of points is %s' % len(mire_after_discretization_x))
+        self.app_state.mire_after_discretization_y = self.app_state.L_value*(0.8*(np.exp(-mire_before_discretization_x**self.app_state.p_value) \
+                    + np.exp(-(mire_before_discretization_x+3.5)**self.app_state.p_value) \
+                    + np.exp(-(mire_before_discretization_x-3.5)**self.app_state.p_value)+ np.exp(-(mire_before_discretization_x+7)**self.app_state.p_value) \
+                    + np.exp(-(mire_before_discretization_x-7)**self.app_state.p_value))+0.2)
 
-        self.app_state.mire_discr.set_ylim(0, self.app_state.L_value+1)
-        self.app_state.mire_discr.set_xlim(0,self.app_state.m_value)
+        self.app_state.mire_after_discretization.set_ylim(0, self.app_state.L_value+1)
+        self.app_state.mire_after_discretization.set_xlim(0,self.app_state.m_value)
 
-        self.app_state.mire_discr.plot(mire_discr_x, self.app_state.mire_discr_y, 'o')
+        self.app_state.mire_after_discretization.plot(mire_after_discretization_x, self.app_state.mire_after_discretization_y, 'o')

@@ -78,7 +78,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <child>
-          <object class="GtkBox" id="MainBox_step1">
+          <object class="GtkBox" id="STEP_1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
@@ -127,7 +127,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="graph before discr">
+              <object class="GtkScrolledWindow" id="mire_before_discretization">
                 <property name="width_request">500</property>
                 <property name="height_request">250</property>
                 <property name="visible">True</property>
@@ -148,12 +148,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="non-discrete-graph-params">
+              <object class="GtkBox" id="non_discrete_plot_parameters">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkGrid" id="p, L parameters">
+                  <object class="GtkGrid" id="p_&amp;_X_parameters">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
@@ -161,7 +161,7 @@
                     <property name="row_homogeneous">True</property>
                     <property name="column_homogeneous">True</property>
                     <child>
-                      <object class="GtkLabel" id="p">
+                      <object class="GtkLabel" id="p_parameter_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Параметр p</property>
@@ -172,7 +172,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="X length">
+                      <object class="GtkLabel" id="x_length_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Длина реализации X</property>
@@ -183,7 +183,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkComboBox" id="p param combobox">
+                      <object class="GtkComboBox" id="p_parameter_combobox">
                         <property name="width_request">60</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -207,7 +207,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="X length_entry">
+                      <object class="GtkEntry" id="x_length_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">center</property>
@@ -242,7 +242,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="graph after discr">
+              <object class="GtkScrolledWindow" id="mire_after_discretization">
                 <property name="width_request">500</property>
                 <property name="height_request">250</property>
                 <property name="visible">True</property>
@@ -265,17 +265,17 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="discrete_plot_parameters">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkBox" id="m_parameter_box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="m_parameter_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Полное число отсчётов m</property>
@@ -287,7 +287,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkComboBox" id="m param">
+                      <object class="GtkComboBox" id="m_parameter_combobox">
                         <property name="width_request">60</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -319,13 +319,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkBox" id="l_parameter_box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="l_parameter_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Число отсчётов по шкале функции L</property>
@@ -337,7 +337,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkComboBox" id="L list">
+                      <object class="GtkComboBox" id="l_parameter_list">
                         <property name="width_request">60</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -376,7 +376,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="information_in_the_signal_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -447,7 +447,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="Step 2">
+          <object class="GtkBox" id="STEP_2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_bottom">5</property>
@@ -520,7 +520,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="Fourier_before">
+              <object class="GtkScrolledWindow" id="fourier_image_before_modification">
                 <property name="width_request">300</property>
                 <property name="height_request">200</property>
                 <property name="visible">True</property>
@@ -584,7 +584,6 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="width_chars">2</property>
                     <property name="max_width_chars">2</property>
                     <property name="input_purpose">digits</property>
-                    <signal name="changed" handler="Frequency_Cut" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -617,7 +616,6 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="width_chars">2</property>
                     <property name="max_width_chars">2</property>
                     <property name="input_purpose">number</property>
-                    <signal name="changed" handler="Frequency_Cut" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -636,7 +634,6 @@ omega_j = delta omega×j - delta omega× m/2</property>
                     <property name="margin_right">10</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">False</property>
-                    <signal name="clicked" handler="Frequency_Cut" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -701,7 +698,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="Fourier_after">
+              <object class="GtkScrolledWindow" id="fourier_image_after_modification">
                 <property name="width_request">300</property>
                 <property name="height_request">200</property>
                 <property name="visible">True</property>

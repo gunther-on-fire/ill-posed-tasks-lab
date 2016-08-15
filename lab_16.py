@@ -32,7 +32,7 @@ logging.info('Starting application')
 
 logging.debug('Loading UI from glade file')
 builder = Gtk.Builder()
-builder.add_from_file('lab_step1.glade')
+builder.add_from_file('lab_pt1.glade')
 
 logging.debug('Showing main window')
 window = builder.get_object('Main Window')

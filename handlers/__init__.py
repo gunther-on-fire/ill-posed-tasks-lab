@@ -8,9 +8,8 @@ class HandlerFinder(object):
     # See <http://stackoverflow.com/questions/4637792> for why this is
     # necessary.
 
-    def __init__(self, app_state):
-        self.backing_objects = [Tab1Handler(app_state), Tab2Handler(app_state)]
-
+    def __init__(self, backing_objects):
+        self.backing_objects = [Tab1Handler(backing_objects), Tab2Handler(backing_objects)]
     def __getattr__(self, name):
         for o in self.backing_objects:
             if hasattr(o, name):

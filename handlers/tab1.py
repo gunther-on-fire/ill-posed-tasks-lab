@@ -1,98 +1,117 @@
-import logging
-import numpy as np
+import gi
+gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
 
+import logging
+import numpy as np
+
 class Handler:
 
-    def __init__(self, app_state):
+    def __init__(self, app):
+        
         self.logger = logging.getLogger('Tab1Handler')
         self.logger.debug('Created Tab1Handler')
+        
+        # Attributes of the class
+        self.app = app
 
-        self.app_state = app_state
-
-        # Populate default values by explicitly calling on-change callbacks
         # Here we disable plotting because all values will be set only at the end of the next block
         self.do_not_plot = True
-        self.On_Changed_P(self.app_state.builder.get_object('p_parameter_combobox'))
-        self.On_Changed_X(self.app_state.builder.get_object('x_length_entry'))
-        self.On_Changed_L(self.app_state.builder.get_object('l_parameter_list'))
-        self.On_Changed_M(self.app_state.builder.get_object('m_parameter_combobox'))
+
+        # Populating default values by explicitly calling on-change callbacks
+        self.onChangedP(app.builder.get_object('p_parameter_combobox'))
+        self.onChangedX(app.builder.get_object('x_length_entry'))
+        self.onChangedL(app.builder.get_object('l_parameter_list'))
+        self.onChangedM(app.builder.get_object('m_parameter_combobox'))
 
         self.do_not_plot = False
 
-        self.plot()
+        self.updatePlot()
+    
+    # Describing the methods of the class
+    def onChangedP(self, p):
+        
+        self.app.p_value =  p.get_model()[p.get_active()][0]
+        self.logger.debug('New p value: %s' % self.app.p_value)
 
-    def On_Changed_P(self, p):
-        self.app_state.p_value =  p.get_model()[p.get_active()][0]
-        self.logger.debug('New p value: %s' % self.app_state.p_value)
+        self.updatePlot()
 
-        self.plot()
+    def onChangedM(self, m):
+        
+        self.app.m_value =  m.get_model()[m.get_active()][0]
+        self.logger.debug('New m value: %s' % self.app.m_value)
 
-    def On_Changed_M(self, m):
-        self.app_state.m_value =  m.get_model()[m.get_active()][0]
-        self.logger.debug('New m value: %s' % self.app_state.m_value)
+        self.updatePlot()
 
-        self.plot()
+    def onChangedL(self, L):
+        
+        self.app.L_value = L.get_model()[L.get_active()][0]
+        self.logger.debug('New L value: %s' % self.app.L_value)
 
-    def On_Changed_L(self, L):
-        self.app_state.L_value = L.get_model()[L.get_active()][0]
-        self.logger.debug('New L value: %s' % self.app_state.L_value)
+        self.updatePlot()
 
-        self.plot()
-
-    def On_Changed_X(self, entry):
-        text = entry.get_text()
-        self.logger.debug('New X entry value: %s' % text)
+    def onChangedX(self, entry):
+        
+        x_text_value = entry.get_text()
+        self.logger.debug('New X entry value: %s' % x_text_value)
         try:
-            self.app_state.x_number = int(text)
+            self.app.x_value = int(x_text_value)
         except:
-            self.app_state.x_number = None
+            self.app.x_value = None
 
-        self.plot()
+        self.updatePlot()
 
-    def CloseApp(self, *args):
+    def closeApp(self, *args):
         Gtk.main_quit(*args)
 
-    def plot(self):
+    def updatePlot(self):
 
         if self.do_not_plot:
             self.logger.debug('Plotting is currently disabled')
             return
 
         self.logger.debug('Cleaning plotting area')
+        self.app.non_discrete_mire.cla()
+        self.app.discrete_mire.cla()
 
-        self.app_state.mire_before_discretization.cla()
-        self.app_state.mire_after_discretization.cla()
-
-        if self.app_state.x_number == None:
-            self.app_state.mire_before_discretization.cla()
-            self.app_state.mire_after_discretization.cla()
+        if self.app.x_value == None:
+            self.app.non_discrete_mire.cla()
+            self.app.discrete_mire.cla()
             self.logger.debug('Current state is invalid, not plotting')
             return
 
         self.logger.debug('Updating non-discrete plot')
 
-        mire_before_discretization_x = np.linspace(-self.app_state.x_number/2, self.app_state.x_number/2, num = self.app_state.m_value, endpoint=True)
-        self.logger.debug('The number of non-discrete plot points is %s' % len(mire_before_discretization_x))
-        mire_before_discretization_y = 0.8*(np.exp(-mire_before_discretization_x**self.app_state.p_value) + np.exp(-(mire_before_discretization_x+3.5)**self.app_state.p_value) \
-                    + np.exp(-(mire_before_discretization_x-3.5)**self.app_state.p_value)+ np.exp(-(mire_before_discretization_x+7)**self.app_state.p_value) \
-                    + np.exp(-(mire_before_discretization_x-7)**self.app_state.p_value))+0.2
-        self.app_state.mire_before_discretization.set_ylim(0.1,1.1)
-        self.app_state.mire_before_discretization.set_xlim(-self.app_state.x_number/2,self.app_state.x_number/2)
+        non_discrete_mire_x = np.linspace(-self.app.x_value/2, self.app.x_value/2, 
+            num=self.app.m_value, endpoint=True)
+        self.logger.debug('The number of non-discrete plot points is %s' % len(non_discrete_mire_x))
 
-        self.app_state.mire_before_discretization.plot(mire_before_discretization_x, mire_before_discretization_y)
+        non_discrete_mire_y = 0.8*(np.exp(-non_discrete_mire_x**self.app.p_value) 
+            + np.exp(-(non_discrete_mire_x+3.5)**self.app.p_value)
+            + np.exp(-(non_discrete_mire_x-3.5)**self.app.p_value)
+            + np.exp(-(non_discrete_mire_x+7)**self.app.p_value)
+            + np.exp(-(non_discrete_mire_x-7)**self.app.p_value)) + 0.2
+        
+        # Setting the limits of the plotting area
+        self.app.non_discrete_mire.set_ylim(0.1,1.1)
+        self.app.non_discrete_mire.set_xlim(-self.app.x_value/2,self.app.x_value/2)
+
+        # Making the plot
+        self.app.non_discrete_mire.plot(non_discrete_mire_x, non_discrete_mire_y)
 
         self.logger.debug('Updating discrete plot')
 
-        mire_after_discretization_x = np.arange(0, self.app_state.m_value, 1)
-        self.logger.debug('The number of points is %s' % len(mire_after_discretization_x))
-        self.app_state.mire_after_discretization_y = self.app_state.L_value*(0.8*(np.exp(-mire_before_discretization_x**self.app_state.p_value) \
-                    + np.exp(-(mire_before_discretization_x+3.5)**self.app_state.p_value) \
-                    + np.exp(-(mire_before_discretization_x-3.5)**self.app_state.p_value)+ np.exp(-(mire_before_discretization_x+7)**self.app_state.p_value) \
-                    + np.exp(-(mire_before_discretization_x-7)**self.app_state.p_value))+0.2)
+        self.app.discrete_mire_x = np.linspace(0, self.app.m_value, self.app.m_value, True)
+        self.logger.debug('The number of points is %s' % len(self.app.discrete_mire_x))
 
-        self.app_state.mire_after_discretization.set_ylim(0, self.app_state.L_value+1)
-        self.app_state.mire_after_discretization.set_xlim(0,self.app_state.m_value)
+        self.app.discrete_mire_y = self.app.L_value*(0.8*(np.exp(-non_discrete_mire_x**self.app.p_value)
+            + np.exp(-(non_discrete_mire_x+3.5)**self.app.p_value)
+            + np.exp(-(non_discrete_mire_x-3.5)**self.app.p_value)
+            + np.exp(-(non_discrete_mire_x+7)**self.app.p_value)
+            + np.exp(-(non_discrete_mire_x-7)**self.app.p_value))+0.2)
 
-        self.app_state.mire_after_discretization.plot(mire_after_discretization_x, self.app_state.mire_after_discretization_y, 'o')
+        self.app.discrete_mire.set_ylim(0, self.app.L_value+50)
+        self.app.discrete_mire.set_xlim(0, self.app.m_value)
+
+        self.app.discrete_mire.plot(self.app.discrete_mire_x, self.app.discrete_mire_y, 'o')

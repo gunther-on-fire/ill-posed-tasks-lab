@@ -1,6 +1,6 @@
 from .tab1 import Handler as Tab1Handler
 from .tab2 import Handler as Tab2Handler
-
+from .tab3 import Handler as Tab3Handler
 
 class HandlerFinder(object):
     """Searches for handler implementations across multiple objects.
@@ -9,7 +9,9 @@ class HandlerFinder(object):
     # necessary.
 
     def __init__(self, backing_objects):
-        self.backing_objects = [Tab1Handler(backing_objects), Tab2Handler(backing_objects)]
+        self.backing_objects = [Tab1Handler(backing_objects), Tab2Handler(backing_objects), 
+        Tab3Handler(backing_objects)]
+
     def __getattr__(self, name):
         for o in self.backing_objects:
             if hasattr(o, name):

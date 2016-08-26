@@ -57,19 +57,36 @@ discrete_mire_sw.add_with_viewport(discrete_canvas)
 
 # Tab2
 
-logging.debug('Calculating FFT of the input data')
+logging.debug('Configuring FFT plot')
 fft_initial_sw = builder.get_object('fourier_image_before_modification')
 fft_initial_fig = Figure(dpi=100)
 fft_initial_canvas = FigureCanvas(fft_initial_fig) 
 fft_initial_subplot = fft_initial_fig.add_subplot(111)
 fft_initial_sw.add_with_viewport(fft_initial_canvas)
 
-logging.debug('Configuring FFT of the input data')
+logging.debug('Configuring plot after modification')
 fft_modified_sw = builder.get_object('fourier_image_after_modification')
 fft_modified_fig = Figure(dpi=100)
 fft_modified_canvas = FigureCanvas(fft_modified_fig) 
 fft_modified_subplot = fft_modified_fig.add_subplot(111)
 fft_modified_sw.add_with_viewport(fft_modified_canvas)
+
+# Tab 3
+
+logging.debug('Configuring FWHL non-discrete plot')
+non_discrete_fwhl_sw = builder.get_object('fwhl_non_discrete')
+non_discrete_fwhl_fig = Figure(dpi=100)
+non_discrete_fwhl_canvas = FigureCanvas(non_discrete_fwhl_fig) 
+non_discrete_fwhl_subplot = non_discrete_fwhl_fig.add_subplot(111)
+non_discrete_fwhl_sw.add_with_viewport(non_discrete_fwhl_canvas)
+
+logging.debug('Configuring FWHL discrete plot')
+discrete_fwhl_sw = builder.get_object('fwhl_discrete')
+discrete_fwhl_fig = Figure(dpi=100)
+discrete_fwhl_canvas = FigureCanvas(discrete_fwhl_fig) 
+discrete_fwhl_subplot = discrete_fwhl_fig.add_subplot(111)
+discrete_fwhl_sw.add_with_viewport(discrete_fwhl_canvas)
+
 
 # Creating an instance of the uniting class
 
@@ -78,10 +95,21 @@ app = Application()
 # A list of Tab(n)Handlers attributes
 
 app.builder = builder
+
+# Tab1Handler
+
 app.non_discrete_mire = non_discrete_mire_subplot
 app.discrete_mire = discrete_mire_subplot
+
+# Tab2Handler
+
 app.fft_initial = fft_initial_subplot
 app.fft_modified = fft_modified_subplot
+
+# Tab3Handler
+
+app.non_discrete_fwhl = non_discrete_fwhl_subplot
+app.discrete_fwhl = discrete_fwhl_subplot
 
 logging.debug('Connecting signals')
 builder.connect_signals(handlers.HandlerFinder(app))

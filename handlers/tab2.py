@@ -1,7 +1,9 @@
 import logging
 import numpy as np
 
+
 class Handler:
+
 
     def __init__(self, app):
         self.logger = logging.getLogger('Tab2Handler')

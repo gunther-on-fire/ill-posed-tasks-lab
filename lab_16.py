@@ -87,6 +87,15 @@ discrete_fwhl_canvas = FigureCanvas(discrete_fwhl_fig)
 discrete_fwhl_subplot = discrete_fwhl_fig.add_subplot(111)
 discrete_fwhl_sw.add_with_viewport(discrete_fwhl_canvas)
 
+# Tab 4
+
+logging.debug('Configuring fourier image of FWHL discrete plot')
+fwhl_fourier_sw = builder.get_object('fwhl_fourier')
+fwhl_fourier_fig = Figure(dpi=100)
+fwhl_fourier_canvas = FigureCanvas(fwhl_fourier_fig) 
+fwhl_fourier_subplot = fwhl_fourier_fig.add_subplot(111)
+fwhl_fourier_sw.add_with_viewport(fwhl_fourier_canvas)
+
 
 # Creating an instance of the uniting class
 
@@ -110,6 +119,10 @@ app.fft_modified = fft_modified_subplot
 
 app.non_discrete_fwhl = non_discrete_fwhl_subplot
 app.discrete_fwhl = discrete_fwhl_subplot
+
+# Tab4Handler
+
+app.fwhl_fourier = fwhl_fourier_subplot
 
 logging.debug('Connecting signals')
 builder.connect_signals(handlers.HandlerFinder(app))

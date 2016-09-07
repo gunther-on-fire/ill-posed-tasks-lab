@@ -29,7 +29,7 @@ class Handler:
 
         self.do_not_plot = False
 
-        self.updatePlot()
+        self.updateInSigPlot()
     
     # Describing the methods of the class
     def onChangedP(self, p):
@@ -37,80 +37,75 @@ class Handler:
         self.app.p_value =  p.get_model()[p.get_active()][0]
         self.logger.debug('New p value: %s' % self.app.p_value)
 
-        self.updatePlot()
+        self.updateInSigPlot()
 
     def onChangedM(self, m):
         
         self.app.m_value =  m.get_model()[m.get_active()][0]
         self.logger.debug('New m value: %s' % self.app.m_value)
 
-        self.updatePlot()
+        self.updateInSigPlot()
 
     def onChangedL(self, L):
         
         self.app.L_value = L.get_model()[L.get_active()][0]
         self.logger.debug('New L value: %s' % self.app.L_value)
 
-        self.updatePlot()
+        self.updateInSigPlot()
 
     def onChangedX(self, x_length):
 
         self.app.x_value = int(x_length.get_value())
         self.logger.debug('The highest frequency to cut is f2 = %s' % self.app.x_value)
-        
-        # x_text_value = entry.get_text()
-        # self.logger.debug('New X entry value: %s' % x_text_value)
-        # try:
-        #     self.app.x_value = int(x_text_value)
-        # except:
-        #     self.app.x_value = None
 
-        self.updatePlot()
+        self.updateInSigPlot()
 
     def closeApp(self, *args):
         Gtk.main_quit(*args)
 
-    def updatePlot(self):
+    def updateInSigPlot(self):
 
         if self.do_not_plot:
             self.logger.debug('Plotting is currently disabled')
             return
 
         self.logger.debug('Cleaning plotting area')
-        self.app.non_discrete_mire.cla()
-        self.app.discrete_mire.cla()
+        self.app.non_discrete_input.cla()
+        self.app.discrete_input.cla()
 
         self.logger.debug('Updating non-discrete plot')
 
-        non_discrete_mire_x = np.linspace(-self.app.x_value/2, self.app.x_value/2, 
+        self.app.non_discrete_input_x = np.linspace(-self.app.x_value/2, self.app.x_value/2, 
             num=self.app.m_value, endpoint=True)
-        self.logger.debug('The number of non-discrete plot points is %s' % len(non_discrete_mire_x))
+        self.logger.debug('The number of non-discrete plot points is %s' 
+            % len(self.app.non_discrete_input_x))
 
-        non_discrete_mire_y = 0.8*(np.e**(-non_discrete_mire_x**self.app.p_value) 
-            + np.e**(-(non_discrete_mire_x+3.5)**self.app.p_value)
-            + np.e**(-(non_discrete_mire_x-3.5)**self.app.p_value)
-            + np.e**(-(non_discrete_mire_x+7)**self.app.p_value)
-            + np.e**(-(non_discrete_mire_x-7)**self.app.p_value)) + 0.2
+        non_discrete_input_y = 0.8*(np.e**(-self.app.non_discrete_input_x**self.app.p_value) 
+            + np.e**(-(self.app.non_discrete_input_x+3.5)**self.app.p_value)
+            + np.e**(-(self.app.non_discrete_input_x-3.5)**self.app.p_value)
+            + np.e**(-(self.app.non_discrete_input_x+7)**self.app.p_value)
+            + np.e**(-(self.app.non_discrete_input_x-7)**self.app.p_value)) + 0.2
         
         # Setting the limits of the plotting area
-        self.app.non_discrete_mire.set_ylim(0.1,1.1)
-        self.app.non_discrete_mire.set_xlim(-self.app.x_value/2,self.app.x_value/2)
+        self.app.non_discrete_input.set_ylim(0.1,1.1)
+        self.app.non_discrete_input.set_xlim(-self.app.x_value/2,self.app.x_value/2)
 
         # Making the plot
-        self.app.non_discrete_mire.plot(non_discrete_mire_x, non_discrete_mire_y)
+        self.app.non_discrete_input.plot(self.app.non_discrete_input_x, non_discrete_input_y)
 
         self.logger.debug('Updating discrete plot')
 
-        self.app.discrete_mire_x = np.linspace(0, self.app.m_value, self.app.m_value, True)
-        self.logger.debug('The number of points is %s' % len(self.app.discrete_mire_x))
+        self.app.discrete_input_x = np.linspace(0, self.app.m_value, self.app.m_value, True)
+        self.logger.debug('The number of points is %s' % len(self.app.discrete_input_x))
 
-        self.app.discrete_mire_y = self.app.L_value*(0.8*(np.e**(-non_discrete_mire_x**self.app.p_value)
-            + np.e**(-(non_discrete_mire_x+3.5)**self.app.p_value)
-            + np.e**(-(non_discrete_mire_x-3.5)**self.app.p_value)
-            + np.e**(-(non_discrete_mire_x+7)**self.app.p_value)
-            + np.e**(-(non_discrete_mire_x-7)**self.app.p_value))+0.2)
+        self.app.discrete_input_y = self.app.L_value \
+        *(0.8*(np.e**(-self.app.non_discrete_input_x**self.app.p_value)
+            + np.e**(-(self.app.non_discrete_input_x+3.5)**self.app.p_value)
+            + np.e**(-(self.app.non_discrete_input_x-3.5)**self.app.p_value)
+            + np.e**(-(self.app.non_discrete_input_x+7)**self.app.p_value)
+            + np.e**(-(self.app.non_discrete_input_x-7)**self.app.p_value))+0.2)
 
-        self.app.discrete_mire.set_ylim(0, self.app.L_value+50)
-        self.app.discrete_mire.set_xlim(0, self.app.m_value)
+        self.app.discrete_input.set_ylim(0, self.app.L_value+50)
+        self.app.discrete_input.set_xlim(0, self.app.m_value)
 
-        self.app.discrete_mire.plot(self.app.discrete_mire_x, self.app.discrete_mire_y, 'o')
+        self.app.discrete_input.plot(self.app.discrete_input_x, self.app.discrete_input_y, 'o')

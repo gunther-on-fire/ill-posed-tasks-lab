@@ -15,13 +15,18 @@ class Handler:
         self.onFrequencyFrom(app.builder.get_object('frequency_from'))
         self.onFrequencyTo(app.builder.get_object('frequency_to'))
 
-    def directFourier(self, button):
+    def onDirectFourier(self, button):
 
-        self.logger.debug('X values vector is %s' % len(self.app.discrete_mire_x))
-        self.app.fourier_y = np.fft.fft(self.app.discrete_mire_y)
-        # The number of points in fft vector is the same with 
-        # the number of points in discrete mire's one
-        self.app.fft_initial.bar(self.app.discrete_mire_x, self.app.fourier_y, width=.7, color='b')
+        # The number of points in fft vector is half less than
+        # the number of points in discrete mire's one because
+        # the function to be transformed is real-valued
+
+        self.app.fft_input_x = np.linspace(0, self.app.m_value//2+1, self.app.m_value//2+1, True)
+
+        self.logger.debug('W values vector is %s' % len(self.app.fft_input_x))
+        self.app.fft_input_y = np.fft.rfft(self.app.discrete_input_y)
+
+        self.app.fft_initial.bar(self.app.fft_input_x, self.app.fft_input_y, width=.7, color='b')
     
     def onFrequencyFrom(self, frequency_from):
 
@@ -33,27 +38,29 @@ class Handler:
         self.app.frequency_to_value = int(frequency_to.get_value())
         self.logger.debug('The highest frequency to cut is f2 = %s' % self.app.frequency_to_value)
 
-    def cutFrequencies(self, button):
+    def onCutFrequencies(self, button):
 
         self.logger.debug('Cleaning plotting area of the FFT of the image')        
         self.app.fft_initial.cla()
 
         # Setting elements of fft vector to 0 from f1 to f2
-        self.app.fourier_y[self.app.frequency_from_value:self.app.frequency_to_value+1] = 0
+        self.app.fft_input_y[self.app.frequency_from_value:self.app.frequency_to_value+1] = 0
         self.logger.debug('Cutting frequencies from %s to %s' % (self.app.frequency_from_value,
             self.app.frequency_to_value))
 
-        self.app.fft_initial.bar(self.app.discrete_mire_x, self.app.fourier_y, width=.7, color='b')
+        self.app.fft_initial.bar(self.app.fft_input_x, self.app.fft_input_y, width=.7, color='b')
 
-    def inverseFourier(self, button):
+    def onInverseFourier(self, button):
         
         self.logger.debug('Cleaning plotting area of the modified image')
         self.app.fft_modified.cla()
 
-        self.logger.debug('X values vector is %s' % len(self.app.discrete_mire_x))
-        self.app.inverse_fourier_y = np.fft.ifft(self.app.fourier_y)
+        self.logger.debug('X values vector is %s' % len(self.app.fft_input_x))
+
+        # Using np.abs() to kill the phase part of the FFT
+        self.app.inverse_fft_input_y = np.abs(np.fft.irfft(self.app.fft_input_y))
 
         self.app.fft_modified.set_ylim(0, self.app.L_value+50)
         self.app.fft_modified.set_xlim(0, self.app.m_value)
         
-        self.app.fft_modified.plot(self.app.discrete_mire_x, self.app.inverse_fourier_y)
+        self.app.fft_modified.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y)

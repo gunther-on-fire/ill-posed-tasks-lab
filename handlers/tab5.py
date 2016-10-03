@@ -21,3 +21,15 @@ class Handler:
         self.app.output_y = np.abs(np.fft.irfft(self.app.fft_output_y))
 
         self.app.output_signal.plot(self.app.non_discrete_input_x, self.app.output_y)
+
+        # Calculating noise/signal ratio
+
+        self.app.mean_output_y = sum(self.app.output_y)/self.app.non_discrete_input_x
+        self.app.mean_noise = self.app.builder.get_object('mean_poisson')
+
+        self.app.noise_to_signal_ratio = self.app.mean_output_y/float(self.app.mean_noise.get_value())
+
+        # TOFIX: set the entry value -- doesn't work
+        self.app.noise_to_signal_entry = self.app.builder.get_object('signal_noise_ratio_entry')
+        self.app.noise_to_signal_entry.set_text(str(self.app.noise_to_signal_ratio))              
+

@@ -5,6 +5,7 @@ from .tab4 import Handler as Tab4Handler
 from .tab5 import Handler as Tab5Handler
 from .tab6 import Handler as Tab6Handler
 from .tab7 import Handler as Tab7Handler
+from .tab9 import Handler as Tab9Handler
 
 class HandlerFinder(object):
     """Searches for handler implementations across multiple objects.
@@ -15,7 +16,7 @@ class HandlerFinder(object):
     def __init__(self, backing_objects):
         self.backing_objects = [Tab1Handler(backing_objects), Tab2Handler(backing_objects), 
         Tab3Handler(backing_objects), Tab4Handler(backing_objects), Tab5Handler(backing_objects),
-        Tab6Handler(backing_objects), Tab7Handler(backing_objects)]
+        Tab6Handler(backing_objects), Tab7Handler(backing_objects), Tab9Handler(backing_objects)]
 
     def __getattr__(self, name):
         for o in self.backing_objects:

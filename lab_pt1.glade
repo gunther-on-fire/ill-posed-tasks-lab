@@ -59,6 +59,21 @@
       <column type="gfloat"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="liststore_noise_to_signal">
+    <columns>
+      <!-- column-name gfloat1 -->
+      <column type="gfloat"/>
+    </columns>
+  </object>
+  <object class="GtkEntryCompletion" id="entrycompletion2">
+    <property name="model">liststore_noise_to_signal</property>
+    <child>
+      <object class="GtkCellRendererText" id="noise_to_signal"/>
+      <attributes>
+        <attribute name="text">0</attribute>
+      </attributes>
+    </child>
+  </object>
   <object class="GtkListStore" id="m param list">
     <columns>
       <!-- column-name gint1 -->
@@ -1332,9 +1347,11 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                     <property name="valign">center</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
+                    <property name="editable">False</property>
                     <property name="max_length">7</property>
                     <property name="width_chars">7</property>
                     <property name="max_width_chars">5</property>
+                    <property name="completion">entrycompletion2</property>
                     <property name="input_purpose">number</property>
                   </object>
                   <packing>

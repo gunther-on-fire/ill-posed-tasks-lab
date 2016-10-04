@@ -34,4 +34,16 @@ class Handler:
 
         self.app.output_signal_with_noise.plot(self.app.discrete_input_x, self.app.output_with_noise_y)
 
+        # Calculating noise/signal ratio
+
+        self.app.mean_output_y = sum(self.app.output_y)/len(self.app.non_discrete_input_x)
+        
+        self.app.mean_noise = self.app.builder.get_object('mean_poisson')
+        self.app.noise_to_signal_ratio = self.app.mean_output_y/float(self.app.mean_noise.get_value())
+        
+
+        # Update noise-to-signal ratio entry
+        self.app.noise_to_signal_entry = self.app.builder.get_object('signal_noise_ratio_entry')
+        self.app.noise_to_signal_entry.set_text(str(self.app.noise_to_signal_ratio))
+
 

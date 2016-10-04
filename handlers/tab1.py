@@ -33,7 +33,7 @@ class Handler:
     
     # Describing the methods of the class
     def onChangedP(self, p):
-        
+
         self.app.p_value =  p.get_model()[p.get_active()][0]
         self.logger.debug('New p value: %s' % self.app.p_value)
 

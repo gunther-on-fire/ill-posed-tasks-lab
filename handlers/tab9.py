@@ -19,6 +19,14 @@ class Handler:
         self.app.alpha = round(float(alpha.get_value()),6)
         self.logger.debug('New alpha value is %s' % self.app.alpha)
 
+    # def onDeleteARow(self, button):
+    #
+    #     self.app.tab_9_store.remove(self.app.tab_9_store.get_selection())
+
+    def onDeleteAllRows(self, button):
+
+        self.app.tab_9_store.clear()
+
     def updateReconstructionPlot(self, button):
 
         # Clearing the plot area
@@ -36,7 +44,6 @@ class Handler:
         self.app.reconstructed_signal.set_ylim(0, self.app.L_value + 50)
 
         self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.reconstructed_input_y)
-        
 
         # Calculating the absolute error 
         # sqrt(sum((sig_in-sig_reconstructed)**2)/number_of_counts) -- the standard deviation
@@ -51,4 +58,9 @@ class Handler:
         self.app.tab_9_store = self.app.builder.get_object('liststoreStep9')
 
         self.app.tab_9_store.append([self.app.alpha, self.app.absolute_error, self.app.relative_error])
+
+        self.app.tab_9_treestore = self.app.builder.get_object('treeviewStep9')
+        self.app.value = self.app.tab_9_treestore.get_selection()
+
+
         

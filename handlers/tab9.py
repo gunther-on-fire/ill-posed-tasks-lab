@@ -1,5 +1,10 @@
 import logging
 import numpy as np
+import gi
+gi.require_version('Gtk', '3.0')
+
+from gi.repository import Gtk
+
 
 class Handler:
 
@@ -14,14 +19,26 @@ class Handler:
         # Populating default values by explicitly calling on-change callbacks
         self.onChangedAlpha(app.builder.get_object('alpha_spinbutton'))
 
+        # Get objects
+        self.app.tab_9_store = self.app.builder.get_object('liststoreStep9')
+        self.app.tab_9_treestore = self.app.builder.get_object('treeviewStep9')
+
     def onChangedAlpha(self, alpha):
         
         self.app.alpha = round(float(alpha.get_value()),6)
         self.logger.debug('New alpha value is %s' % self.app.alpha)
 
-    # def onDeleteARow(self, button):
-    #
-    #     self.app.tab_9_store.remove(self.app.tab_9_store.get_selection())
+    def onDeleteARow(self, button):
+
+        selection = self.app.tab_9_treestore.get_selection()
+        
+        model, paths = selection.get_selected_rows()
+
+        self.logger.debug('Row # ' + str([p.to_string() for p in paths]) + ' has been deleted')
+
+        for p in reversed(paths):
+            itr = model.get_iter(p)
+            model.remove(itr)
 
     def onDeleteAllRows(self, button):
 
@@ -55,12 +72,10 @@ class Handler:
         # Calculating the relative error
         self.app.relative_error = (self.app.absolute_error/self.app.mean_discrete_input_y)*100
 
-        self.app.tab_9_store = self.app.builder.get_object('liststoreStep9')
-
+        # Adding a row with all necessary data
         self.app.tab_9_store.append([self.app.alpha, self.app.absolute_error, self.app.relative_error])
 
-        self.app.tab_9_treestore = self.app.builder.get_object('treeviewStep9')
-        self.app.value = self.app.tab_9_treestore.get_selection()
+
 
 
         

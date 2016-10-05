@@ -2090,20 +2090,31 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                     </child>
                     <child>
                       <object class="GtkScrolledWindow">
+                        <property name="width_request">300</property>
+                        <property name="height_request">400</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="margin_left">10</property>
+                        <property name="margin_right">10</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
                         <property name="shadow_type">in</property>
                         <child>
                           <object class="GtkTreeView" id="treeviewStep9">
+                            <property name="width_request">300</property>
+                            <property name="height_request">400</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="model">liststoreStep9</property>
+                            <property name="enable_search">False</property>
                             <property name="enable_grid_lines">both</property>
                             <child internal-child="selection">
-                              <object class="GtkTreeSelection"/>
+                              <object class="GtkTreeSelection" id="selectionStep9">
+                                <property name="mode">multiple</property>
+                              </object>
                             </child>
                             <child>
-                              <object class="GtkTreeViewColumn">
+                              <object class="GtkTreeViewColumn" id="alpha">
                                 <property name="resizable">True</property>
                                 <property name="title" translatable="yes">α</property>
                                 <child>
@@ -2115,7 +2126,8 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkTreeViewColumn">
+                              <object class="GtkTreeViewColumn" id="error">
+                                <property name="resizable">True</property>
                                 <property name="title" translatable="yes">Ошибка, отн.ед.</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertextError"/>
@@ -2126,7 +2138,8 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkTreeViewColumn">
+                              <object class="GtkTreeViewColumn" id="relative_error">
+                                <property name="resizable">True</property>
                                 <property name="title" translatable="yes">Ошибка, %</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertexRelativeError"/>
@@ -2152,10 +2165,11 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                         <property name="spacing">10</property>
                         <child>
                           <object class="GtkButton">
-                            <property name="label" translatable="yes">Очистить</property>
+                            <property name="label" translatable="yes">Удалить строку</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <signal name="clicked" handler="onDeleteARow" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2165,7 +2179,7 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                         </child>
                         <child>
                           <object class="GtkButton">
-                            <property name="label" translatable="yes">Очистить всё</property>
+                            <property name="label" translatable="yes">Удалить всё</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>

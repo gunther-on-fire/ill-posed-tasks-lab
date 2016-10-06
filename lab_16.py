@@ -136,14 +136,12 @@ reconstructed_signal_sw.add_with_viewport(reconstructed_signal_canvas)
 
 # Regularization coefficient part
 
-logging.debug('Configuring alpha-error plot')
+logging.debug('Configuring error vs alpha plot')
 regularization_sw = builder.get_object('regularization_coefficient')
 regularization_fig = Figure(dpi=100)
 regularization_canvas = FigureCanvas(regularization_fig) 
 regularization_subplot = regularization_fig.add_subplot(111)
 regularization_sw.add_with_viewport(regularization_canvas)
-
-
 
 # Creating an instance of the uniting class
 
@@ -190,6 +188,7 @@ builder.connect_signals(handlers.HandlerFinder(app))
 # Tab9Handler
 
 app.reconstructed_signal = reconstructed_signal_subplot
+app.regularization = regularization_subplot
 
 # Setting the initial parameters  
 # for the alpha adjustment

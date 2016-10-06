@@ -2117,6 +2117,8 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                               <object class="GtkTreeViewColumn" id="alpha">
                                 <property name="resizable">True</property>
                                 <property name="title" translatable="yes">α</property>
+                                <property name="sort_indicator">True</property>
+                                <property name="sort_column_id">0</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrendererteAlpha"/>
                                   <attributes>
@@ -2235,11 +2237,12 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkButton">
-                            <property name="label" translatable="yes">button</property>
+                          <object class="GtkButton" id="error_vs_alpha_button">
+                            <property name="label" translatable="yes">График</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <signal name="clicked" handler="updateErrorAlphaPlot" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>

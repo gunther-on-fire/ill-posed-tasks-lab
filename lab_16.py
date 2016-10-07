@@ -6,9 +6,10 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 import logging
-import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_gtk3cairo import FigureCanvasGTK3Cairo as FigureCanvas
+from matplotlib.backends.backend_gtk3 import NavigationToolbar2GTK3 as NavigationToolbar
+
 
 import handlers
 
@@ -45,6 +46,11 @@ non_discrete_input_canvas = FigureCanvas(non_discrete_input_fig)
 # and then embedding it into the GtkScrolledWindow
 non_discrete_input_sw.add_with_viewport(non_discrete_input_canvas)
 
+# Embedding a toolbar from matplotlib library
+toolbar1_1 = NavigationToolbar(non_discrete_input_canvas, window)
+non_discrete_input_toolbar = builder.get_object('toolbar1_1')
+non_discrete_input_toolbar.add_with_viewport(toolbar1_1)
+
 # Discrete part
 
 logging.debug('Configuring the discrete plot')
@@ -55,6 +61,10 @@ discrete_input_subplot = discrete_input_fig.add_subplot(111)
 discrete_input_canvas = FigureCanvas(discrete_input_fig) 
 discrete_input_sw.add_with_viewport(discrete_input_canvas)
 
+toolbar1_2 = NavigationToolbar(discrete_input_canvas, window)
+discrete_input_toolbar = builder.get_object('toolbar1_2')
+discrete_input_toolbar.add_with_viewport(toolbar1_2)
+
 # Tab2
 
 logging.debug('Configuring the FFT plot')
@@ -64,12 +74,20 @@ fft_initial_canvas = FigureCanvas(fft_initial_fig)
 fft_initial_subplot = fft_initial_fig.add_subplot(111)
 fft_initial_sw.add_with_viewport(fft_initial_canvas)
 
+toolbar2_1 = NavigationToolbar(fft_initial_canvas, window)
+fft_initial_toolbar = builder.get_object('toolbar2_1')
+fft_initial_toolbar.add_with_viewport(toolbar2_1)
+
 logging.debug('Configuring the plot after modification')
 fft_modified_sw = builder.get_object('fourier_image_after_modification')
 fft_modified_fig = Figure(dpi=100)
 fft_modified_canvas = FigureCanvas(fft_modified_fig) 
 fft_modified_subplot = fft_modified_fig.add_subplot(111)
 fft_modified_sw.add_with_viewport(fft_modified_canvas)
+
+toolbar2_2 = NavigationToolbar(fft_modified_canvas, window)
+fft_modified_toolbar = builder.get_object('toolbar2_2')
+fft_modified_toolbar.add_with_viewport(toolbar2_2)
 
 # Tab 3
 
@@ -96,6 +114,10 @@ fft_fwhl_canvas = FigureCanvas(fft_fwhl_fig)
 fft_fwhl_subplot = fft_fwhl_fig.add_subplot(111)
 fft_fwhl_sw.add_with_viewport(fft_fwhl_canvas)
 
+toolbar4 = NavigationToolbar(fft_fwhl_canvas, window)
+fft_fwhl_toolbar = builder.get_object('toolbar4')
+fft_fwhl_toolbar.add_with_viewport(toolbar4)
+
 # Tab5
 
 logging.debug('Configuring the fourier image of the FWHL discrete plot')
@@ -104,6 +126,10 @@ output_signal_fig = Figure(dpi=100)
 output_signal_canvas = FigureCanvas(output_signal_fig) 
 output_signal_subplot = output_signal_fig.add_subplot(111)
 output_signal_sw.add_with_viewport(output_signal_canvas)
+
+toolbar5 = NavigationToolbar(output_signal_canvas, window)
+output_signal_toolbar = builder.get_object('toolbar5')
+output_signal_toolbar.add_with_viewport(toolbar5)
 
 # Tab6
 
@@ -114,14 +140,22 @@ output_signal_with_noise_canvas = FigureCanvas(output_signal_with_noise_fig)
 output_signal_with_noise_subplot = output_signal_with_noise_fig.add_subplot(111)
 output_signal_with_noise_sw.add_with_viewport(output_signal_with_noise_canvas)
 
+toolbar6 = NavigationToolbar(output_signal_with_noise_canvas, window)
+output_signal_with_noise_toolbar = builder.get_object('toolbar6')
+output_signal_with_noise_toolbar.add_with_viewport(toolbar6)
+
 # Tab 7
 
 logging.debug('Configuring FFT spectra of the output signal and noise plot')
 output_and_noise_fft_sw = builder.get_object('output_and_noise_spectra')
 output_and_noise_fft_fig = Figure(dpi=100)
-output_and_noise_fft_canvas = FigureCanvas(output_and_noise_fft_fig) 
+output_and_noise_fft_canvas = FigureCanvas(output_and_noise_fft_fig)
 output_and_noise_fft_subplot = output_and_noise_fft_fig.add_subplot(111)
 output_and_noise_fft_sw.add_with_viewport(output_and_noise_fft_canvas)
+
+toolbar7 = NavigationToolbar(output_and_noise_fft_canvas, window)
+output_and_noise_fft_toolbar = builder.get_object('toolbar7')
+output_and_noise_fft_toolbar.add_with_viewport(toolbar7)
 
 # Tab 9
 
@@ -134,6 +168,10 @@ reconstructed_signal_canvas = FigureCanvas(reconstructed_signal_fig)
 reconstructed_signal_subplot = reconstructed_signal_fig.add_subplot(111)
 reconstructed_signal_sw.add_with_viewport(reconstructed_signal_canvas)
 
+toolbar9_1 = NavigationToolbar(reconstructed_signal_canvas, window)
+reconstructed_signal_toolbar = builder.get_object('toolbar9_1')
+reconstructed_signal_toolbar.add_with_viewport(toolbar9_1)
+
 # Regularization coefficient part
 
 logging.debug('Configuring error vs alpha plot')
@@ -142,6 +180,10 @@ regularization_fig = Figure(dpi=100)
 regularization_canvas = FigureCanvas(regularization_fig) 
 regularization_subplot = regularization_fig.add_subplot(111)
 regularization_sw.add_with_viewport(regularization_canvas)
+
+toolbar9_2 = NavigationToolbar(regularization_canvas, window)
+regularization_toolbar = builder.get_object('toolbar9_2')
+regularization_toolbar.add_with_viewport(toolbar9_2)
 
 # Creating an instance of the uniting class
 

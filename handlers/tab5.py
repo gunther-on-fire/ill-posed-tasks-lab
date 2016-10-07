@@ -22,5 +22,6 @@ class Handler:
         # Using np.abs() method to kill the phase from the FFT
         self.app.output_y = np.abs(np.fft.irfft(self.app.fft_output_y))
 
+        self.app.output_signal.grid(True)
         self.app.output_signal.plot(self.app.non_discrete_input_x, self.app.output_y)
 

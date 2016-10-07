@@ -47,10 +47,12 @@ class Handler:
         *(np.log([2])/np.pi)**0.5*np.e**(-(4*np.log([2]) \
         *self.app.non_discrete_input_x**2)/self.app.fwhl_value**2)
 
+        self.app.non_discrete_fwhl.grid(True)
         self.app.non_discrete_fwhl.set_xlim(-10, 10)
 
-        self.app.non_discrete_fwhl.plot(self.app.non_discrete_input_x, self.app.non_discrete_fwhl_y, '*')
+        self.app.non_discrete_fwhl.plot(self.app.non_discrete_input_x, self.app.non_discrete_fwhl_y, '^')
 
+        self.app.discrete_fwhl.grid(True)
         self.app.discrete_fwhl.plot(self.app.discrete_input_x, self.app.non_discrete_fwhl_y)
 
 

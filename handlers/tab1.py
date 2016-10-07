@@ -63,6 +63,8 @@ class Handler:
     def closeApp(self, *args):
         Gtk.main_quit(*args)
 
+
+
     def updateInSigPlot(self):
 
         if self.do_not_plot:
@@ -89,6 +91,7 @@ class Handler:
         # Setting the limits of the plotting area
         self.app.non_discrete_input.set_ylim(0.1,1.1)
         self.app.non_discrete_input.set_xlim(-self.app.x_value/2,self.app.x_value/2)
+        self.app.non_discrete_input.grid(True)
 
         # Making the plot
         self.app.non_discrete_input.plot(self.app.non_discrete_input_x, non_discrete_input_y)
@@ -107,5 +110,6 @@ class Handler:
 
         self.app.discrete_input.set_ylim(0, self.app.L_value+50)
         self.app.discrete_input.set_xlim(0, self.app.m_value)
+        self.app.discrete_input.grid(True)
 
         self.app.discrete_input.plot(self.app.discrete_input_x, self.app.discrete_input_y, 'o')

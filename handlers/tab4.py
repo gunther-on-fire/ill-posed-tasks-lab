@@ -26,10 +26,11 @@ class Handler:
         # so sum(fhwl_y)*step = 1 => step = 1/sum(fwhl)
         
         self.app.norm_ampl_fft_fwhl_y = np.abs(self.app.fft_fwhl_y) \
-        /sum(self.app.non_discrete_fwhl_y)     
-        
-        self.app.fft_fwhl.set_xlim(0, self.app.m_value//2+10)
-        self.app.fft_fwhl.bar(self.app.fft_input_x, self.app.norm_ampl_fft_fwhl_y, width=.7, color='b')
+        /sum(self.app.non_discrete_fwhl_y)
 
+        self.app.fft_fwhl.set_xlim(0, 65)
+        self.app.fft_fwhl.bar(np.arange(len(self.app.fft_input_x)), self.app.norm_ampl_fft_fwhl_y,
+                                        width=.5, color='b', align='center')
+        self.app.fft_fwhl.grid(True)
 
   

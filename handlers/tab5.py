@@ -11,17 +11,17 @@ class Handler:
 
         self.app = app
 
-    def updateOutSigPlot(self, button):
+    def updateSpectraPlot(self, button):
 
-        # self.app.output_signal.cla()
-        # self.app.noise_to_signal_entry = self.app.builder.get_object('signal_noise_ratio_entry')
-        # self.app.noise_to_signal_entry.set_text('0')  
+        self.app.output_and_noise_fft.cla()
 
-        self.app.fft_output_y = self.app.norm_ampl_fft_fwhl_y*self.app.fft_input_y
+        self.app.fft_noise_y = np.abs(np.fft.rfft(self.app.noise_y))
+        self.app.ampl_fft_output_y = np.abs(self.app.fft_output_y)
 
-        # Using np.abs() method to kill the phase from the FFT
-        self.app.output_y = np.abs(np.fft.irfft(self.app.fft_output_y))
-
-        self.app.output_signal.grid(True)
-        self.app.output_signal.plot(self.app.non_discrete_input_x, self.app.output_y)
+        self.app.output_and_noise_fft.set_xlim(0, 65)
+        self.app.output_and_noise_fft.bar(np.arange(len(self.app.fft_input_x)), self.app.ampl_fft_output_y,
+                                          width=.5, color='r', align='center')
+        self.app.output_and_noise_fft.bar(np.arange(len(self.app.fft_input_x)), self.app.fft_noise_y,
+                                          width=.5, color='b', align='center')
+        self.app.output_and_noise_fft.grid(True)
 

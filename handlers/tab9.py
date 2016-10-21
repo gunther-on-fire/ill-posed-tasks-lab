@@ -68,10 +68,12 @@ class Handler:
         # Clearing the plot area
         self.app.reconstructed_signal.cla()
 
+        # Setting the limits and drawing the grid
         self.app.reconstructed_signal.grid(True)
         self.app.reconstructed_signal.set_xlim(0, self.app.m_value)
         self.app.reconstructed_signal.set_ylim(0, self.app.L_value + 50)
 
+        # Plotting the input signal
         self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y)
 
         self.app.omega = 2 * np.pi * self.app.fft_input_x / self.app.x_value
@@ -81,6 +83,7 @@ class Handler:
 
         self.app.reconstructed_input_y = np.fft.irfft(self.app.reconstructed_input_fft)
 
+        # Plotting the reconstructed signal
         self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.reconstructed_input_y)
 
         # Calculating the absolute error

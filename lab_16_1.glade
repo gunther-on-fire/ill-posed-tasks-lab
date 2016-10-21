@@ -139,6 +139,7 @@
   <object class="GtkWindow" id="Main Window">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
+    <property name="title" translatable="yes">Квазиреальный эксперимент</property>
     <signal name="delete-event" handler="closeApp" swapped="no"/>
     <child>
       <object class="GtkNotebook">
@@ -212,6 +213,20 @@
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="toolbar1_1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
               </packing>
             </child>
             <child>
@@ -305,7 +320,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">4</property>
+                <property name="position">5</property>
               </packing>
             </child>
             <child>
@@ -328,7 +343,21 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">5</property>
+                <property name="position">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="toolbar1_2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">7</property>
               </packing>
             </child>
             <child>
@@ -439,7 +468,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">6</property>
+                <property name="position">8</property>
               </packing>
             </child>
             <child>
@@ -453,7 +482,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">7</property>
+                <property name="position">9</property>
               </packing>
             </child>
             <child>
@@ -495,7 +524,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">8</property>
+                <property name="position">10</property>
               </packing>
             </child>
           </object>
@@ -519,6 +548,7 @@
             <property name="can_focus">False</property>
             <property name="margin_bottom">5</property>
             <property name="orientation">vertical</property>
+            <property name="spacing">5</property>
             <child>
               <object class="GtkLabel" id="Fourier_Head_label">
                 <property name="visible">True</property>
@@ -604,6 +634,20 @@ omega_j = delta omega×j - delta omega× m/2</property>
               </packing>
             </child>
             <child>
+              <object class="GtkScrolledWindow" id="toolbar2_1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkLabel" id="Freq_to_choose_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -619,7 +663,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">3</property>
+                <property name="position">4</property>
               </packing>
             </child>
             <child>
@@ -726,7 +770,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">4</property>
+                <property name="position">5</property>
               </packing>
             </child>
             <child>
@@ -776,7 +820,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">5</property>
+                <property name="position">6</property>
               </packing>
             </child>
             <child>
@@ -793,7 +837,21 @@ omega_j = delta omega×j - delta omega× m/2</property>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">6</property>
+                <property name="position">7</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="toolbar2_2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">8</property>
               </packing>
             </child>
             <child>
@@ -812,7 +870,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">7</property>
+                <property name="position">9</property>
               </packing>
             </child>
             <child>
@@ -860,7 +918,7 @@ omega_j = delta omega×j - delta omega× m/2</property>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">8</property>
+                <property name="position">10</property>
               </packing>
             </child>
           </object>
@@ -1034,7 +1092,7 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="STEP_4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
@@ -1059,7 +1117,7 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="halign">center</property>
-                    <property name="valign">center</property>
+                    <property name="valign">start</property>
                     <property name="margin_top">10</property>
                     <property name="margin_bottom">10</property>
                     <property name="hexpand">True</property>
@@ -1099,6 +1157,21 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="toolbar4">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="valign">start</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
@@ -1149,6 +1222,7 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
                         <property name="label" translatable="yes">Формула</property>
                       </object>
                       <packing>
@@ -1214,7 +1288,6 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
                 <property name="border_width">10</property>
-                <property name="shadow_type">in</property>
                 <property name="min_content_width">500</property>
                 <property name="min_content_height">250</property>
                 <child>
@@ -1223,8 +1296,24 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="toolbar5">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
@@ -1321,7 +1410,6 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                 <property name="can_focus">False</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
                 <property name="border_width">10</property>
                 <child>
                   <object class="GtkLabel" id="signal_noise_ratio_label">
@@ -1420,6 +1508,21 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="toolbar6">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>
@@ -1543,7 +1646,7 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                 <property name="margin_top">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
+                <property name="vexpand">False</property>
                 <property name="shadow_type">in</property>
                 <property name="min_content_width">500</property>
                 <property name="min_content_height">250</property>
@@ -1555,6 +1658,20 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="toolbar7">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
@@ -1931,6 +2048,7 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
                 <property name="hexpand">True</property>
                 <child>
                   <object class="GtkLabel">
@@ -2233,6 +2351,22 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkScrolledWindow" id="toolbar9_1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="margin_top">5</property>
+                        <property name="margin_bottom">5</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -2242,6 +2376,9 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="halign">end</property>
+                            <property name="margin_right">10</property>
+                            <property name="hexpand">True</property>
                             <signal name="clicked" handler="updateErrorAlphaPlot" swapped="no"/>
                           </object>
                           <packing>
@@ -2254,7 +2391,7 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                     <child>
@@ -2274,7 +2411,24 @@ g(x)=alpha/sqrt(pi)×exp(-(alpha×x)**2)</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">2</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkScrolledWindow" id="toolbar9_2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="margin_top">5</property>
+                        <property name="margin_bottom">5</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>

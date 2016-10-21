@@ -13,9 +13,9 @@ class Handler:
 
     def updateOutSigPlot(self, button):
 
-        self.app.output_signal.cla()
-        self.app.noise_to_signal_entry = self.app.builder.get_object('signal_noise_ratio_entry')
-        self.app.noise_to_signal_entry.set_text('0')  
+        # self.app.output_signal.cla()
+        # self.app.noise_to_signal_entry = self.app.builder.get_object('signal_noise_ratio_entry')
+        # self.app.noise_to_signal_entry.set_text('0')  
 
         self.app.fft_output_y = self.app.norm_ampl_fft_fwhl_y*self.app.fft_input_y
 

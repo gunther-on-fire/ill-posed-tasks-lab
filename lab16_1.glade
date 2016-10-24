@@ -577,6 +577,7 @@
                             <property name="valign">center</property>
                             <property name="hexpand">True</property>
                             <property name="vexpand">True</property>
+                            <property name="editable">False</property>
                             <property name="max_length">7</property>
                             <property name="width_chars">7</property>
                             <property name="max_width_chars">7</property>
@@ -1034,6 +1035,7 @@
                             <property name="margin_right">10</property>
                             <property name="hexpand">True</property>
                             <property name="vexpand">True</property>
+                            <property name="editable">False</property>
                             <property name="max_length">7</property>
                             <property name="width_chars">7</property>
                             <property name="max_width_chars">7</property>
@@ -1770,6 +1772,7 @@
                             <property name="can_focus">True</property>
                             <property name="halign">center</property>
                             <property name="valign">start</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -1786,6 +1789,7 @@
                             <property name="can_focus">True</property>
                             <property name="halign">center</property>
                             <property name="valign">start</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -1802,6 +1806,7 @@
                             <property name="can_focus">True</property>
                             <property name="halign">center</property>
                             <property name="valign">start</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -2288,6 +2293,7 @@
                             <property name="halign">start</property>
                             <property name="valign">center</property>
                             <property name="hexpand">True</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -2330,6 +2336,7 @@
                             <property name="halign">start</property>
                             <property name="valign">center</property>
                             <property name="hexpand">True</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -2383,6 +2390,7 @@
                             <property name="halign">start</property>
                             <property name="valign">center</property>
                             <property name="hexpand">True</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -2437,6 +2445,7 @@
                             <property name="halign">start</property>
                             <property name="valign">center</property>
                             <property name="hexpand">True</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -2491,6 +2500,7 @@
                             <property name="halign">start</property>
                             <property name="valign">center</property>
                             <property name="hexpand">True</property>
+                            <property name="editable">False</property>
                             <property name="max_length">5</property>
                             <property name="width_chars">5</property>
                             <property name="max_width_chars">5</property>
@@ -2762,6 +2772,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="halign">start</property>
                                     <property name="valign">center</property>
+                                    <property name="editable">False</property>
                                     <property name="max_length">5</property>
                                     <property name="width_chars">5</property>
                                     <property name="max_width_chars">5</property>

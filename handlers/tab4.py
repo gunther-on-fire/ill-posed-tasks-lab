@@ -16,8 +16,6 @@ class Handler:
     def updateOutSigPlot(self, button):
 
         self.app.output_signal.cla()
-        # self.app.noise_to_signal_entry = self.app.builder.get_object('tab4_entry_signal_noise_ratio')
-        # self.app.noise_to_signal_entry.set_text('0')
 
         self.app.fft_output_y = self.app.norm_ampl_fft_fwhl_y * self.app.fft_input_y
 
@@ -45,6 +43,7 @@ class Handler:
         self.app.output_with_noise_y = self.app.output_y + self.app.noise_y
 
         self.app.output_signal_with_noise.set_xlim(0, self.app.m_value)
+        self.app.output_signal_with_noise.set_ylim(0, max(self.app.output_with_noise_y) + 50)
         self.app.output_signal_with_noise.grid(True)
         self.app.output_signal_with_noise.plot(self.app.discrete_input_x, self.app.output_with_noise_y)
 

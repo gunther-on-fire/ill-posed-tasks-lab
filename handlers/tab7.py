@@ -61,9 +61,10 @@ class Handler:
         # Plotting the input signal
         self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y)
 
-        self.app.omega = 2 * np.pi * self.app.fft_input_x / self.app.x_value
+        self.app.omega = self.app.fft_input_x  / self.app.x_value
+        print(self.app.omega)
 
-        self.app.reconstructed_input_fft = (np.fft.rfft(self.app.output_y) + np.fft.rfft(self.app.noise_y))/ \
+        self.app.reconstructed_input_fft = (self.app.fft_output_y + np.fft.rfft(self.app.noise_y))/ \
         (self.app.norm_ampl_fft_fwhl_y + self.app.alpha * (1 + self.app.omega ** 2) / self.app.norm_ampl_fft_fwhl_y)
 
         self.app.reconstructed_input_y = np.fft.irfft(self.app.reconstructed_input_fft)
@@ -73,22 +74,21 @@ class Handler:
 
         # Calculating the absolute error
         # sqrt (sum((sig_in - sig_reconstructed) ** 2) / number_of_counts) -- the standard deviation
-        self.app.absolute_error = (sum((self.app.discrete_input_y - self.app.reconstructed_input_y) ** 2) /
-                                   len(self.app.discrete_input_x)) ** 0.5
+        self.app.absolute_error = round((sum((self.app.discrete_input_y - self.app.reconstructed_input_y) ** 2) \
+                                   / len(self.app.discrete_input_x)) ** 0.5, 2)
 
         # Calculating the mean value of the input signal, max/2
         self.app.mean_discrete_input_y = max(self.app.discrete_input_y) / 2
 
         # Calculating the relative error
-        self.app.relative_error = (self.app.absolute_error / self.app.mean_discrete_input_y) * 100
+        self.app.relative_error = round((self.app.absolute_error / self.app.mean_discrete_input_y) * 100, 2)
 
         # Adding a row with all necessary data
-        self.app.tab_7_store.append([self.app.alpha, self.app.absolute_error, self.app.relative_error])
+        treeiter = self.app.tab_7_store.append([self.app.alpha, self.app.absolute_error, self.app.relative_error])
 
-        #TOFIX: Can't update entry, something's wrong with treeiter
-        # # Updating the value in the error entry
-        # self.app.absolute_error_entry = self.app.builder.get_object('tab7_entry_absolute_error')
-        # self.app.absolute_error_entry.set_text(str(self.app.error_array[self.app.tab_7_store][1]))
+        # Updating the value in the error entry
+        self.app.absolute_error_entry = self.app.builder.get_object('tab7_entry_absolute_error')
+        self.app.absolute_error_entry.set_text(str(round(self.app.tab_7_store[treeiter][1], 2)))
 
     def updateErrorAlphaPlot(self, button):
 

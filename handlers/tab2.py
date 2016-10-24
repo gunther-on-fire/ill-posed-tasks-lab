@@ -28,7 +28,7 @@ class Handler:
         self.logger.debug('ω values vector is %s' % len(self.app.fft_input_x))
         self.app.fft_input_y = np.fft.rfft(self.app.discrete_input_y)
 
-        self.app.fft_initial.set_xlim(0, 65)
+        self.app.fft_initial.set_xlim(-1, 65)
         self.app.fft_initial.bar(np.arange(len(self.app.fft_input_y)), self.app.fft_input_y,
                                  width=.5, color='b', align='center')
         self.app.fft_initial.grid(True)
@@ -49,7 +49,7 @@ class Handler:
         self.logger.debug('Cutting frequencies from ' + str(self.app.frequency_from_value) + 'to '
                           + str(self.app.frequency_to_value))
 
-        self.app.fft_initial.set_xlim(0, 65)
+        self.app.fft_initial.set_xlim(-1, 65)
         self.app.fft_initial.bar(np.arange(len(self.app.fft_input_y)), self.app.fft_input_y,
                                  width=.5, color='b', align='center')
         self.app.fft_initial.grid(True)

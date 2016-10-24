@@ -102,7 +102,7 @@ class Handler:
                                               + np.e ** (-(self.app.non_discrete_input_x - 7) ** self.app.p_value))
                                               + 0.2)
 
-        self.app.discrete_input.set_ylim(0, self.app.L_value + 50)
+        self.app.discrete_input.set_ylim(0, 1.1 * self.app.L_value)
         self.app.discrete_input.set_xlim(0, self.app.m_value)
         self.app.discrete_input.grid(True)
 

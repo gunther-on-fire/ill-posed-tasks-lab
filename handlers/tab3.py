@@ -43,7 +43,7 @@ class Handler:
         self.app.discrete_fwhl.set_xlim(0, len(self.app.discrete_input_x))
         self.app.discrete_fwhl.set_ylim(0, 1.1 * max(self.app.non_discrete_fwhl_y))
         self.app.discrete_fwhl.grid(True)
-        self.app.discrete_fwhl.plot(self.app.discrete_input_x, self.app.non_discrete_fwhl_y, '^')
+        self.app.discrete_fwhl.plot(self.app.discrete_input_x, self.app.non_discrete_fwhl_y, 'o')
 
     def updateFWHLFFTPlot(self, button):
 
@@ -62,7 +62,7 @@ class Handler:
         self.app.norm_ampl_fft_fwhl_y = np.abs(self.app.fft_fwhl_y) \
                                         / sum(self.app.non_discrete_fwhl_y)
 
-        self.app.fft_fwhl.set_xlim(0, 65)
+        self.app.fft_fwhl.set_xlim(-1, 65)
         self.app.fft_fwhl.bar(np.arange(len(self.app.fft_input_x)), self.app.norm_ampl_fft_fwhl_y,
                               width=.5, color='b', align='center')
         self.app.fft_fwhl.grid(True)

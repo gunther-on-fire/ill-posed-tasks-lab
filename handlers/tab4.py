@@ -43,7 +43,7 @@ class Handler:
         self.app.output_with_noise_y = self.app.output_y + self.app.noise_y
 
         self.app.output_signal_with_noise.set_xlim(0, self.app.m_value)
-        self.app.output_signal_with_noise.set_ylim(0, max(self.app.output_with_noise_y) + 50)
+        self.app.output_signal_with_noise.set_ylim(0, 1.1 * max(self.app.output_with_noise_y))
         self.app.output_signal_with_noise.grid(True)
         self.app.output_signal_with_noise.plot(self.app.discrete_input_x, self.app.output_with_noise_y)
 

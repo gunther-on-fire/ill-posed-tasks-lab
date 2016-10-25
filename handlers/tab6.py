@@ -42,7 +42,7 @@ class Handler:
         self.app.shannon_coefficient_entry = self.app.builder.get_object('tab6_entry_K')
         self.app.shannon_coefficient_entry.set_text(str(self.app.shannon_coefficient))
 
-        # minimal error
+        # Minimal error
         self.app.min_error_entry = self.app.builder.get_object('tab6_entry_min_error')
         self.app.min_error_entry.set_text(str(self.app.min_error))
 

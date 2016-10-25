@@ -62,7 +62,7 @@ class Handler:
         self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y)
 
         self.app.omega = self.app.fft_input_x  / self.app.x_value
-        print(self.app.omega)
+
 
         self.app.reconstructed_input_fft = (self.app.fft_output_y + np.fft.rfft(self.app.noise_y))/ \
         (self.app.norm_ampl_fft_fwhl_y + self.app.alpha * (1 + self.app.omega ** 2) / self.app.norm_ampl_fft_fwhl_y)

@@ -65,8 +65,8 @@ class Handler:
         self.app.inverse_fft_input_y = np.abs(np.fft.irfft(self.app.fft_input_y))
 
         self.app.fft_modified.grid(True)
-        self.app.fft_modified.set_xlim(0, self.app.m_value)
-        self.app.fft_modified.set_ylim(0, self.app.L_value + 50)
+        # self.app.fft_modified.set_xlim(0, self.app.m_value)
+        # self.app.fft_modified.set_ylim(0, 1.1 * self.app.L_value)
         
         self.app.fft_modified.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y)
 

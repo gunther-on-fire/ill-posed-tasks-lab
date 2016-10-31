@@ -84,6 +84,8 @@ class Handler:
         # Setting the limits of the plotting area
         self.app.non_discrete_input.set_ylim(0.1, 1.1)
         self.app.non_discrete_input.set_xlim(-self.app.x_value / 2, self.app.x_value / 2)
+        self.app.non_discrete_input.set_xlabel(r'$x$', fontsize = 12, labelpad = -2)
+        self.app.non_discrete_input.set_ylabel('E(x)/L', fontsize = 12)
         self.app.non_discrete_input.grid(True)
 
         # Making the plot
@@ -104,6 +106,8 @@ class Handler:
 
         self.app.discrete_input.set_ylim(0, 1.1 * self.app.L_value)
         self.app.discrete_input.set_xlim(0, self.app.m_value)
+        self.app.discrete_input.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+        self.app.discrete_input.set_ylabel(r'$E(x_i)$', fontsize = 12)
         self.app.discrete_input.grid(True)
 
         self.app.discrete_input.plot(self.app.discrete_input_x, self.app.discrete_input_y, 'o')

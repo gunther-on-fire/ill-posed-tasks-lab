@@ -44,7 +44,7 @@ logging.debug('Configuring the non-discrete plot')
 # Getting GtkScrolledWindow from the glade file
 non_discrete_input_sw = builder.get_object('tab1_scrolledwindow1')
 # Creating an instance of a matplotlib.figure and defining its resolution (dpi) 
-non_discrete_input_fig = Figure(dpi=100)
+non_discrete_input_fig = Figure(figsize=(5,2))
 # Adding a subplot to the plot
 # 111 means that we have a 1 x 1 grid and are putting the subplot in the 1st cell
 non_discrete_input_subplot = non_discrete_input_fig.add_subplot(111)
@@ -63,7 +63,7 @@ non_discrete_input_toolbar.add_with_viewport(toolbar1_1)
 logging.debug('Configuring the discrete plot')
 
 discrete_input_sw = builder.get_object('tab1_scrolledwindow3')
-discrete_input_fig = Figure(dpi=100)
+discrete_input_fig = Figure(figsize=(5,2))
 discrete_input_subplot = discrete_input_fig.add_subplot(111)
 discrete_input_canvas = FigureCanvas(discrete_input_fig) 
 discrete_input_sw.add_with_viewport(discrete_input_canvas)
@@ -87,7 +87,7 @@ formula2_3.set_from_file('./images/formula2_3.png')
 
 logging.debug('Configuring the FFT plot')
 fft_initial_sw = builder.get_object('tab2_scrolledwindow1')
-fft_initial_fig = Figure(dpi=100)
+fft_initial_fig = Figure(figsize=(5,2))
 fft_initial_canvas = FigureCanvas(fft_initial_fig) 
 fft_initial_subplot = fft_initial_fig.add_subplot(111)
 fft_initial_sw.add_with_viewport(fft_initial_canvas)
@@ -98,7 +98,7 @@ fft_initial_toolbar.add_with_viewport(toolbar2_1)
 
 logging.debug('Configuring the plot after modification')
 fft_modified_sw = builder.get_object('tab2_scrolledwindow3')
-fft_modified_fig = Figure(dpi=100)
+fft_modified_fig = Figure(figsize=(5,2))
 fft_modified_canvas = FigureCanvas(fft_modified_fig) 
 fft_modified_subplot = fft_modified_fig.add_subplot(111)
 fft_modified_sw.add_with_viewport(fft_modified_canvas)
@@ -230,7 +230,7 @@ formula5_2.set_from_file('./images/formula5_2.png')
 
 logging.debug('Configuring FFT spectra of the output signal and noise plot')
 output_and_noise_fft_sw = builder.get_object('tab5_scrolledwindow1_spectra_signal_noise')
-output_and_noise_fft_fig = Figure(dpi=100)
+output_and_noise_fft_fig = Figure(figsize=(5,2))
 output_and_noise_fft_canvas = FigureCanvas(output_and_noise_fft_fig)
 output_and_noise_fft_subplot = output_and_noise_fft_fig.add_subplot(111)
 output_and_noise_fft_sw.add_with_viewport(output_and_noise_fft_canvas)
@@ -321,6 +321,14 @@ app.discrete_input = discrete_input_subplot
 app.fft_initial = fft_initial_subplot
 app.fft_modified = fft_modified_subplot
 
+app.fft_initial.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+app.fft_initial.set_ylabel(r'$Ф_{in}(i)$', fontsize = 12)
+app.fft_initial.grid(True)
+
+app.fft_modified.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+app.fft_modified.set_ylabel(r'$Ф_{in}(i)$', fontsize = 12)
+app.fft_modified.grid(True)
+
 # Tab3Handler
 
 app.non_discrete_fwhl = non_discrete_fwhl_subplot
@@ -344,10 +352,12 @@ app.fft_fwhl.grid(True)
 app.output_signal = output_signal_subplot
 app.output_signal.set_xlabel(r'$i$', fontsize = 12, labelpad = -2)
 app.output_signal.set_ylabel(r'$E_{con}(x_i)$', fontsize = 12)
+app.output_signal.grid(True)
 
 app.output_signal_with_noise = output_signal_with_noise_subplot
 app.output_signal_with_noise.set_xlabel(r'$i$', fontsize = 12, labelpad = -2)
 app.output_signal_with_noise.set_ylabel(r'$E_{out}(x_i)$', fontsize = 12)
+app.output_signal_with_noise.grid(True)
 
 # Tab5Handler
 

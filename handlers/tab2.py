@@ -29,6 +29,8 @@ class Handler:
         self.app.fft_input_y = np.fft.rfft(self.app.discrete_input_y)
 
         self.app.fft_initial.set_xlim(-1, 65)
+        self.app.fft_initial.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+        self.app.fft_initial.set_ylabel(r'$Ф_{in}(i)$', fontsize = 12)
         self.app.fft_initial.bar(np.arange(len(self.app.fft_input_y)), self.app.fft_input_y,
                                  width=.5, color='b', align='center')
         self.app.fft_initial.grid(True)
@@ -50,6 +52,8 @@ class Handler:
                           + str(self.app.frequency_to_value))
 
         self.app.fft_initial.set_xlim(-1, 65)
+        self.app.fft_initial.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+        self.app.fft_initial.set_ylabel(r'$Ф_{in}(i)$', fontsize = 12)
         self.app.fft_initial.bar(np.arange(len(self.app.fft_input_y)), self.app.fft_input_y,
                                  width=.5, color='b', align='center')
         self.app.fft_initial.grid(True)
@@ -66,6 +70,8 @@ class Handler:
 
         self.app.fft_modified.grid(True)
         self.app.fft_modified.set_xlim(0, self.app.m_value)
+        self.app.fft_modified.set_xlabel(r'$x_i$', fontsize = 12, labelpad = -5)
+        self.app.fft_modified.set_ylabel(r'$E(x_i)$', fontsize = 12)
         self.app.fft_modified.set_ylim(0, 1.1 * max(self.app.inverse_fft_input_y))
         
         self.app.fft_modified.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y)

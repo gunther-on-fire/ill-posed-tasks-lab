@@ -37,11 +37,17 @@ class Handler:
 
         self.app.non_discrete_fwhl.set_xlim(-10, 10)
         self.app.non_discrete_fwhl.set_ylim(0, 1.1 * max(self.app.non_discrete_fwhl_y))
+        self.app.non_discrete_fwhl.set_xlabel(r'$x_i$', fontsize = 12, labelpad = -5)
+        self.app.non_discrete_fwhl.set_ylabel(r'$g(x_i)$', fontsize = 12, labelpad = -5)
         self.app.non_discrete_fwhl.grid(True)
         self.app.non_discrete_fwhl.plot(self.app.non_discrete_input_x, self.app.non_discrete_fwhl_y)
 
         self.app.discrete_fwhl.set_xlim(0, len(self.app.discrete_input_x))
+        self.app.discrete_fwhl.set_xticks([min(self.app.discrete_input_x), max(self.app.discrete_input_x), 
+            len(self.app.discrete_input_x) // 2])
         self.app.discrete_fwhl.set_ylim(0, 1.1 * max(self.app.non_discrete_fwhl_y))
+        self.app.discrete_fwhl.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+        self.app.discrete_fwhl.set_ylabel(r'$g(x_i)$', fontsize = 12, labelpad = -5)
         self.app.discrete_fwhl.grid(True)
         self.app.discrete_fwhl.plot(self.app.discrete_input_x, self.app.non_discrete_fwhl_y, 'o')
 
@@ -62,10 +68,15 @@ class Handler:
         self.app.norm_ampl_fft_fwhl_y = np.abs(self.app.fft_fwhl_y) \
                                         / sum(self.app.non_discrete_fwhl_y)
 
-        self.app.fft_fwhl.set_xlim(-1, 65)
+        self.app.fft_fwhl.set_xlim(-1, int(self.app.builder.get_object('tab3_omega_scale_spinbutton').get_value()))
+        self.app.fft_fwhl.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+        self.app.fft_fwhl.set_ylabel(r'$K(ω_i)$', fontsize = 12, labelpad = -5)
         self.app.fft_fwhl.bar(np.arange(len(self.app.fft_input_x)), self.app.norm_ampl_fft_fwhl_y,
                               width=.5, color='b', align='center')
         self.app.fft_fwhl.grid(True)
+
+
+
 
 
 

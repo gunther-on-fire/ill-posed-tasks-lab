@@ -31,7 +31,7 @@ class Handler:
 
 
     def onChangedAlpha(self, alpha):
-        self.app.alpha = round(float(alpha.get_value()), 6)
+        self.app.alpha = float(alpha.get_value())
         self.logger.debug('New alpha value is %s' % self.app.alpha)
 
     def onDeleteARow(self, button):
@@ -53,24 +53,27 @@ class Handler:
         # Clearing the plot area
         self.app.reconstructed_signal.cla()
 
-        # Setting the limits and drawing the grid
-        self.app.reconstructed_signal.grid(True)
-        self.app.reconstructed_signal.set_xlim(0, self.app.m_value)
-        self.app.reconstructed_signal.set_ylim(0, self.app.L_value + 50)
+        # Setting the labels and drawing the grid
 
-        # Plotting the input signal
-        self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y)
+        self.app.reconstructed_signal.set_xlabel(r'$x_i$', fontsize=12)
+        self.app.reconstructed_signal.set_ylabel(r'$E(x_i)$', fontsize=12)
+        self.app.reconstructed_signal.grid(True)
 
         self.app.omega = self.app.fft_input_x  / self.app.x_value
-
 
         self.app.reconstructed_input_fft = (self.app.fft_output_y + np.fft.rfft(self.app.noise_y))/ \
         (self.app.norm_ampl_fft_fwhl_y + self.app.alpha * (1 + self.app.omega ** 2) / self.app.norm_ampl_fft_fwhl_y)
 
         self.app.reconstructed_input_y = np.fft.irfft(self.app.reconstructed_input_fft)
 
+        # Plotting the input signal
+        self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.inverse_fft_input_y,
+            '--', linewidth=2, color = 'navy')
+        self.app.reconstructed_signal.set_xlim(0, self.app.m_value)
+        self.app.reconstructed_signal.set_ylim(0, 1.6 * max(self.app.inverse_fft_input_y))
         # Plotting the reconstructed signal
         self.app.reconstructed_signal.plot(self.app.discrete_input_x, self.app.reconstructed_input_y)
+        self.app.reconstructed_signal.legend(["Входной сигнал", "Восстановленный сигнал"], loc = 4, prop={'size':8})
 
         # Calculating the absolute error
         # sqrt (sum((sig_in - sig_reconstructed) ** 2) / number_of_counts) -- the standard deviation
@@ -104,6 +107,8 @@ class Handler:
         for row in self.app.tab_7_store:
            self.app.error_array = np.append(self.app.error_array, row[1])
 
+        self.app.regularization.set_xlabel('α', fontsize = 12, labelpad = -5)
+        self.app.regularization.set_ylabel('Ошибка, отн. ед.', fontsize = 12)
         self.app.regularization.grid(True)
         self.app.regularization.plot(self.app.alpha_array, self.app.error_array)
 

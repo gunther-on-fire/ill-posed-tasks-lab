@@ -22,6 +22,8 @@ class Handler:
         # Using np.abs() method to kill the phase from the FFT
         self.app.output_y = np.abs(np.fft.irfft(self.app.fft_output_y))
 
+        self.app.output_signal.set_xlabel(r'$i$', fontsize = 12, labelpad = -2)
+        self.app.output_signal.set_ylabel(r'$E_{con}(x_i)$', fontsize = 12)
         self.app.output_signal.grid(True)
         self.app.output_signal.plot(self.app.non_discrete_input_x, self.app.output_y)
 
@@ -44,6 +46,8 @@ class Handler:
 
         self.app.output_signal_with_noise.set_xlim(0, self.app.m_value)
         self.app.output_signal_with_noise.set_ylim(0, 1.1 * max(self.app.output_with_noise_y))
+        self.app.output_signal_with_noise.set_xlabel(r'$i$', fontsize = 12, labelpad = -2)
+        self.app.output_signal_with_noise.set_ylabel(r'$E_{out}(x_i)$', fontsize = 12)
         self.app.output_signal_with_noise.grid(True)
         self.app.output_signal_with_noise.plot(self.app.discrete_input_x, self.app.output_with_noise_y)
 

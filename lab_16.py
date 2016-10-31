@@ -130,7 +130,7 @@ formula3_5.set_from_file('./images/formula2_2.png') # the same formula with Tab2
 
 logging.debug('Configuring the FWHL non-discrete plot')
 non_discrete_fwhl_sw = builder.get_object('tab3_scrolledwindow1')
-non_discrete_fwhl_fig = Figure(dpi=100)
+non_discrete_fwhl_fig = Figure(figsize=(5,2))
 non_discrete_fwhl_canvas = FigureCanvas(non_discrete_fwhl_fig) 
 non_discrete_fwhl_subplot = non_discrete_fwhl_fig.add_subplot(111)
 non_discrete_fwhl_sw.add_with_viewport(non_discrete_fwhl_canvas)
@@ -141,7 +141,7 @@ non_discrete_fwhl_toolbar.add_with_viewport(toolbar3_1)
 
 logging.debug('Configuring the FWHL discrete plot')
 discrete_fwhl_sw = builder.get_object('tab3_scrolledwindow2')
-discrete_fwhl_fig = Figure(dpi=100)
+discrete_fwhl_fig = Figure(figsize=(5,2))
 discrete_fwhl_canvas = FigureCanvas(discrete_fwhl_fig) 
 discrete_fwhl_subplot = discrete_fwhl_fig.add_subplot(111)
 discrete_fwhl_sw.add_with_viewport(discrete_fwhl_canvas)
@@ -154,7 +154,7 @@ discrete_fwhl_toolbar.add_with_viewport(toolbar3_2)
 
 logging.debug('Configuring the fourier image of the FWHL discrete plot')
 fft_fwhl_sw = builder.get_object('tab3_scrolledwindow5')
-fft_fwhl_fig = Figure(dpi=100)
+fft_fwhl_fig = Figure(figsize=(5,2))
 fft_fwhl_canvas = FigureCanvas(fft_fwhl_fig) 
 fft_fwhl_subplot = fft_fwhl_fig.add_subplot(111)
 fft_fwhl_sw.add_with_viewport(fft_fwhl_canvas)
@@ -195,7 +195,7 @@ formula4_8.set_from_file('./images/formula4_8_1.png')
 
 logging.debug('Configuring the output signal plot')
 output_signal_sw = builder.get_object('tab4_scrolledwindow1')
-output_signal_fig = Figure(dpi=100)
+output_signal_fig = Figure(figsize=(5,2))
 output_signal_canvas = FigureCanvas(output_signal_fig) 
 output_signal_subplot = output_signal_fig.add_subplot(111)
 output_signal_sw.add_with_viewport(output_signal_canvas)
@@ -208,7 +208,7 @@ output_signal_toolbar.add_with_viewport(toolbar4_1)
 
 logging.debug('Configuring the output mire with the noise plot')
 output_signal_with_noise_sw = builder.get_object('tab4_scrolledwindow3')
-output_signal_with_noise_fig = Figure(dpi=100)
+output_signal_with_noise_fig = Figure(figsize=(5,2))
 output_signal_with_noise_canvas = FigureCanvas(output_signal_with_noise_fig) 
 output_signal_with_noise_subplot = output_signal_with_noise_fig.add_subplot(111)
 output_signal_with_noise_sw.add_with_viewport(output_signal_with_noise_canvas)
@@ -281,7 +281,7 @@ formula7_5.set_from_file('./images/formula7_5.png')
 
 logging.debug('Configuring the reconstructed signal plot')
 reconstructed_signal_sw = builder.get_object('tab7_scrolledwindow1')
-reconstructed_signal_fig = Figure(dpi=100)
+reconstructed_signal_fig = Figure(figsize=(5,2))
 reconstructed_signal_canvas = FigureCanvas(reconstructed_signal_fig) 
 reconstructed_signal_subplot = reconstructed_signal_fig.add_subplot(111)
 reconstructed_signal_sw.add_with_viewport(reconstructed_signal_canvas)
@@ -294,7 +294,7 @@ reconstructed_signal_toolbar.add_with_viewport(toolbar7_1)
 
 logging.debug('Configuring error vs alpha plot')
 regularization_sw = builder.get_object('tab7_scrolledwindow3')
-regularization_fig = Figure(dpi=100)
+regularization_fig = Figure(figsize=(5,2))
 regularization_canvas = FigureCanvas(regularization_fig) 
 regularization_subplot = regularization_fig.add_subplot(111)
 regularization_sw.add_with_viewport(regularization_canvas)
@@ -327,19 +327,50 @@ app.non_discrete_fwhl = non_discrete_fwhl_subplot
 app.discrete_fwhl = discrete_fwhl_subplot
 app.fft_fwhl = fft_fwhl_subplot
 
+app.non_discrete_fwhl.set_xlabel(r'$x_i$', fontsize = 12, labelpad = -5)
+app.non_discrete_fwhl.set_ylabel(r'$g(x_i)$', fontsize = 12, labelpad = -5)
+app.non_discrete_fwhl.grid(True)
+
+app.discrete_fwhl.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+app.discrete_fwhl.set_ylabel(r'$g(x_i)$', fontsize = 12, labelpad = -5)
+app.discrete_fwhl.grid(True)
+
+app.fft_fwhl.set_xlabel(r'$i$', fontsize = 12, labelpad = -5)
+app.fft_fwhl.set_ylabel(r'$K(ω_i)$', fontsize = 12, labelpad = -5)
+app.fft_fwhl.grid(True)
+
 # Tab4Handler
 
 app.output_signal = output_signal_subplot
+app.output_signal.set_xlabel(r'$i$', fontsize = 12, labelpad = -2)
+app.output_signal.set_ylabel(r'$E_{con}(x_i)$', fontsize = 12)
+
 app.output_signal_with_noise = output_signal_with_noise_subplot
+app.output_signal_with_noise.set_xlabel(r'$i$', fontsize = 12, labelpad = -2)
+app.output_signal_with_noise.set_ylabel(r'$E_{out}(x_i)$', fontsize = 12)
 
 # Tab5Handler
 
 app.output_and_noise_fft = output_and_noise_fft_subplot
 
+app.output_and_noise_fft.set_ylabel('Ф(ω)', fontsize = 12)
+app.output_and_noise_fft_RIGHT = app.output_and_noise_fft.twinx()
+app.output_and_noise_fft_RIGHT.set_yticklabels([])
+app.output_and_noise_fft_RIGHT.set_ylabel('N(ω)', fontsize = 12)
+app.output_and_noise_fft.grid(True)
+
 # Tab7Handler
 
 app.reconstructed_signal = reconstructed_signal_subplot
 app.regularization = regularization_subplot
+
+app.reconstructed_signal.set_xlabel(r'$x_i$', fontsize = 12, labelpad = -5)
+app.reconstructed_signal.set_ylabel(r'$E(x_i)$', fontsize = 12)
+app.reconstructed_signal.grid(True)
+
+app.regularization.set_xlabel('α', fontsize = 12, labelpad = -5)
+app.regularization.set_ylabel('Ошибка, отн. ед.', fontsize = 12)
+app.regularization.grid(True)
 
 # Setting the initial parameters  
 # for the alpha adjustment
@@ -348,7 +379,7 @@ alpha_adjustment = app.builder.get_object('tab7_adjustment_alpha')
 alpha_adjustment.set_lower(0.00001)
 alpha_adjustment.set_value(0.01)
 alpha_adjustment.set_upper(10)
-alpha_adjustment.set_step_increment(0.001)
+alpha_adjustment.set_step_increment(0.05)
 
 logging.debug('Connecting signals')
 builder.connect_signals(handlers.HandlerFinder(app))
